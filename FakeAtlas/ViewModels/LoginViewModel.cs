@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace FakeAtlas.ViewModels
 {
-    public class LoginViewModel : BaseViewModel<Account>
+    public class LoginViewModel : BaseViewModel<BookingUser>
     {
-        public Account SelectedAccount
+        public BookingUser SelectedAccount
         {
             get { return _objectViewModel; }
             set
