@@ -1,4 +1,4 @@
-﻿using MahApps.Metro.Controls;
+﻿using FakeAtlas.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,11 +16,12 @@ namespace FakeAtlas.Views
     /// <summary>
     /// Логика взаимодействия для LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : MetroWindow
+    public partial class LoginWindow : Window
     {
         public LoginWindow()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel(this);
         }
     }
 }

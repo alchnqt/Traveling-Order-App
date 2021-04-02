@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:FakeAtlas"
         mc:Ignorable="d"
         Title="{DynamicResource m_Title}" Height="553" Width="503">
-    <Grid HorizontalAlignment="Right" Width="auto">
-        <Frame Source="Views/AccountPage.xaml"></Frame>
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="{Binding ResizeBorderThikness}"/>
+    </WindowChrome.WindowChrome>
+    <Grid>
     </Grid>
 </Window>

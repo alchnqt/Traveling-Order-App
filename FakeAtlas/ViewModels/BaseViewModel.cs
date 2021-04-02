@@ -7,7 +7,7 @@ using System.Text;
 
 namespace FakeAtlas.ViewModels
 {
-    public abstract class ObjectViewModel<T> : INotifyPropertyChanged
+    public class BaseViewModel<T> : INotifyPropertyChanged
     {
         protected T _objectViewModel;
 
@@ -17,7 +17,11 @@ namespace FakeAtlas.ViewModels
 
         public void Remove(T _object) => ObjectsViewModel.Remove(_object);
 
-        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// A base view model that fires Property Changed events as needed
+        /// </summary>      
+        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)

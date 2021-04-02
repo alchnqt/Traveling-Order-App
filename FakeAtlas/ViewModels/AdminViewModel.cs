@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FakeAtlas.ViewModels
 {
-    public class AdminViewModel : ObjectViewModel<Admin>
+    public class AdminViewModel : BaseViewModel<Admin>
     {
         public Admin SelectedAdmin
         {
