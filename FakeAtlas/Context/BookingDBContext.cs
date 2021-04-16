@@ -1,11 +1,10 @@
 ﻿using System;
-using FakeAtlas.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace FakeAtlas.Context
+namespace FakeAtlas
 {
     public partial class BookingDBContext : DbContext
     {
@@ -28,7 +27,7 @@ namespace FakeAtlas.Context
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-477QQK7;Database=BookingDB;Trusted_Connection=True;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-477QQK7;Database=BookingDB;Trusted_Connection=True;");
             }
         }
 
@@ -40,12 +39,9 @@ namespace FakeAtlas.Context
             {
                 entity.ToTable("booking_user");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.FullName)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("full_name");
 
@@ -53,10 +49,17 @@ namespace FakeAtlas.Context
 
                 entity.Property(e => e.IsAdmin).HasColumnName("is_admin");
 
+                entity.Property(e => e.UserLogin)
+                    .HasMaxLength(256)
+                    .HasColumnName("user_login");
+
+                entity.Property(e => e.UserPassword)
+                    .HasMaxLength(256)
+                    .HasColumnName("user_password");
+
                 entity.HasOne(d => d.IdAddressNavigation)
                     .WithMany(p => p.BookingUsers)
                     .HasForeignKey(d => d.IdAddress)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_idx_address");
             });
 
@@ -75,7 +78,6 @@ namespace FakeAtlas.Context
                     .HasColumnName("order_time");
 
                 entity.Property(e => e.PathName)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("path_name");
 
@@ -84,13 +86,11 @@ namespace FakeAtlas.Context
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ClientId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_client_id");
 
                 entity.HasOne(d => d.Shipper)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ShipperId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_shipper_id");
             });
 
@@ -103,7 +103,6 @@ namespace FakeAtlas.Context
                     .HasColumnName("id");
 
                 entity.Property(e => e.FullName)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("full_name");
 
@@ -121,17 +120,14 @@ namespace FakeAtlas.Context
                 entity.Property(e => e.BuildingNum).HasColumnName("building_num");
 
                 entity.Property(e => e.City)
-                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("city");
 
                 entity.Property(e => e.Oblast)
-                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("oblast");
 
                 entity.Property(e => e.StreetName)
-                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("street_name");
             });

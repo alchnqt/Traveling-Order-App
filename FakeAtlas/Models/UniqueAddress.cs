@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace FakeAtlas.Models
+namespace FakeAtlas
 {
     public partial class UniqueAddress
     {
@@ -16,7 +16,7 @@ namespace FakeAtlas.Models
         public string City { get; set; }
         public string Oblast { get; set; }
         public string StreetName { get; set; }
-        public int BuildingNum { get; set; }
+        public int? BuildingNum { get; set; }
 
         public virtual ICollection<BookingUser> BookingUsers { get; set; }
     }

@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="FakeAtlas.CustomUIElements.CloseButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FakeAtlas.CustomUIElements"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="30">
+    <Grid>
+        <Border CornerRadius="3" >
+            <ContentControl>
+                <Image Source="C:\Users\wonde\source\repos\FakeAtlas\FakeAtlas\CustomUIElements\Content\cancel.png"></Image>
+            </ContentControl>
+        </Border>
+    </Grid>
+</UserControl>

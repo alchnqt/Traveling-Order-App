@@ -3,22 +3,28 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace FakeAtlas.Models
+namespace FakeAtlas
 {
-#nullable enable
-    public partial class BookingUser : ObjectModel
+    public partial class BookingUser
     {
+        public BookingUser(string login, string password, int id = 0)
+        {
+            Orders = new HashSet<Order>();
+            UserLogin = login;
+            UserPassword = password;
+            IsAdmin = false;
+        }
         public BookingUser()
         {
             Orders = new HashSet<Order>();
         }
-
         public int Id { get; set; }
-        public string ?FullName { get; set; }
-        public int ?IdAddress { get; set; }
+        public string FullName { get; set; }
+        public int? IdAddress { get; set; }
         public bool IsAdmin { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public string UserLogin { get; set; }
+        public string UserPassword { get; set; }
+
         public virtual UniqueAddress IdAddressNavigation { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }

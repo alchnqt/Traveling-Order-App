@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace FakeAtlas.Models
+namespace FakeAtlas
 {
     public partial class Shipper
     {
@@ -14,7 +14,7 @@ namespace FakeAtlas.Models
 
         public int Id { get; set; }
         public string FullName { get; set; }
-        public int VehicleNum { get; set; }
+        public int? VehicleNum { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
     }

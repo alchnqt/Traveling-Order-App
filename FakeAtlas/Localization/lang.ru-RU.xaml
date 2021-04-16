@@ -7,4 +7,7 @@
     <v:String x:Key="m_InputPassword">введите пароль</v:String>
     <v:String x:Key="m_InputLogin">введите логин</v:String>
     <v:String x:Key="m_KeepMe">Запомнить меня</v:String>
+    <v:String x:Key="m_SignIn">Авторизоваться</v:String>
+    <v:String x:Key="m_SignUp">Не зарегистрированы?</v:String>
+    <v:String x:Key="m_SignUpPage">Зарегистрироваться</v:String>
 </ResourceDictionary>

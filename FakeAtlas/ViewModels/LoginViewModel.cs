@@ -1,15 +1,20 @@
-﻿using FakeAtlas.Models;
+﻿using FakeAtlas.Context.UnitOfWork;
+using FakeAtlas.Models;
 using FakeAtlas.Views;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace FakeAtlas.ViewModels
 {
-    public class LoginViewModel : BaseViewModel<BookingUser>
+    public class LoginViewModel : BaseViewModel<Login>
     {
-        public BookingUser SelectedAccount
+        public Login SelectedAccount
         {
             get { return _objectViewModel; }
             set
@@ -18,6 +23,7 @@ namespace FakeAtlas.ViewModels
                 OnPropertyChanged("SelectedAccount");
             }
         }
+
         #region Private members
         private LoginWindow _loginWindow;
         /// <summary>
@@ -40,11 +46,14 @@ namespace FakeAtlas.ViewModels
                 OnPropertyChanged(nameof(WindowRadius));
                 OnPropertyChanged(nameof(WindowCornerRadius));
             };
+            LogInCommand = new RelayCommand(o => LoginClick());
+            unitOfWork = new UnitOfWork();
         }
 
+        #region Window properties
         public int ResizeBorder { get; set; } = 6;
 
-        public Thickness ResizeBorderThikness { get { return new Thickness(ResizeBorder + OuterMarginSize); } }
+        public Thickness ResizeBorderThikness { get { return new Thickness(ResizeBorder); } }
         /// <summary>
         /// The margin around the window
         /// </summary>
@@ -86,6 +95,35 @@ namespace FakeAtlas.ViewModels
             get
             {
                 return new CornerRadius(OuterMarginSize);
+            }
+        }
+        #endregion
+
+        UnitOfWork unitOfWork;
+        public ICommand LogInCommand { get; set; }
+        
+        private void LoginClick()
+        {
+            StringBuilder Sb = new StringBuilder();
+            using (var hash = SHA256.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(_loginWindow.tbPassword.Password));
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+            try
+            {
+                var accessUser = (from user in unitOfWork.BookingUsers.GetAll()
+                                  where user.UserLogin == _loginWindow.tbLogin.Text
+                                  && user.UserPassword == Sb.ToString()
+                                  select user).Single();
+
+                MessageBox.Show("Connected!");
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
     }
