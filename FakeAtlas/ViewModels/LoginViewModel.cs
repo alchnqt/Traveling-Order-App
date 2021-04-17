@@ -40,13 +40,11 @@ namespace FakeAtlas.ViewModels
             _loginWindow = loginWindow;
             _loginWindow.StateChanged += (sender, e) =>
             {
-                OnPropertyChanged(nameof(ResizeBorderThikness));
-                OnPropertyChanged(nameof(OuterMarginSize));
-                OnPropertyChanged(nameof(OuterMarginSizeThickness));
                 OnPropertyChanged(nameof(WindowRadius));
                 OnPropertyChanged(nameof(WindowCornerRadius));
             };
             LogInCommand = new RelayCommand(o => LoginClick());
+            CloseCommand = new RelayCommand(o => CloseClick());
             unitOfWork = new UnitOfWork();
         }
 
@@ -125,6 +123,13 @@ namespace FakeAtlas.ViewModels
             {
                 MessageBox.Show(e.Message);
             }
+        }
+
+        public ICommand CloseCommand { get; set; }
+
+        private void CloseClick()
+        {
+            _loginWindow.Close();
         }
     }
 }

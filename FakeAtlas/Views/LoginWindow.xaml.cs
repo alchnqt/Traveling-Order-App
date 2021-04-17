@@ -41,5 +41,10 @@ namespace FakeAtlas.Views
         {
             tbLogin.GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

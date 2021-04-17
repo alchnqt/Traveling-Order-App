@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ce ="clr-namespace:FakeAtlas.CustomUIElements"
         xmlns:local="clr-namespace:FakeAtlas.Views" 
         xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
@@ -10,13 +11,17 @@
         Title="LoginWindow" Height="479" Width="393"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
-        WindowStyle="None" xmlns:uc="clr-namespace:FakeAtlas.CustomUIElements">
+        WindowStyle="None" xmlns:uc="clr-namespace:FakeAtlas.CustomUIElements"
+        ResizeMode="NoResize">
     <WindowChrome.WindowChrome>
-        <WindowChrome ResizeBorderThickness="{Binding ResizeBorderThikness}"
-                      CornerRadius="{Binding WindowCornerRadius}"
-                      />
+        <WindowChrome 
+                      CornerRadius="{Binding WindowCornerRadius}"/>
     </WindowChrome.WindowChrome>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380*"/>
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -25,16 +30,19 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <uc:InputTextBox x:Name="tbLogin" Text="{Binding SelectedAccount.UserName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="0" Margin="10,0,15,40"/>
-        <PasswordBox x:Name="tbPassword" FontSize="24" Grid.Row="3" Grid.Column="0" Margin="10,0,15,40"/>
-        <uc:PressButton Text="{DynamicResource m_SignIn}" Grid.Row="4" Margin="22,20,21,19" Command="{Binding ButtonCommand}" 
+        <uc:InputTextBox x:Name="tbLogin" Text="{Binding SelectedAccount.UserName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="0" Margin="10,0,2,40"/>
+        <PasswordBox x:Name="tbPassword" FontSize="24" Grid.Row="3" Grid.Column="0" Margin="10,0,2,40"/>
+        <uc:PressButton Text="{DynamicResource m_SignIn}" Grid.Row="4" Margin="22,20,8,19" Command="{Binding ButtonCommand}" 
                         Click="PressButton_Click" />
-        <uc:CloseButton Margin="366,5,0,58" HorizontalAlignment="Left" Width="23"/>
-        <uc:SignUpButton Text="{DynamicResource m_SignUp}" Margin="214,54,21,66" Grid.Row="4" Grid.RowSpan="2"
+
+        <uc:SignUpButton Text="{DynamicResource m_SignUp}" Margin="214,54,8,66" Grid.Row="4" Grid.RowSpan="2"
                          Click="SignUpButton_Click"/>
-        <uc:SignUpPage x:Name="SignUpFrame" Grid.RowSpan="4" Grid.Row="1" Visibility="Collapsed"></uc:SignUpPage>
-        <Button Content="Sign Up" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <uc:SignUpPage x:Name="SignUpFrame" Grid.RowSpan="4" Grid.Row="1" Visibility="Collapsed" Grid.ColumnSpan="2"></uc:SignUpPage>
+        <Button Content="Sign Up" HorizontalAlignment="Left" Margin="174,45,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <Button Content="Log In" HorizontalAlignment="Left" Margin="263,45,0,0" VerticalAlignment="Top" Click="Button_Click"
                 Command="{Binding LogInCommand}" CommandParameter="{Binding ElementName=tbPassword}" IsDefault="True"/>
+        <StackPanel Margin="293,55,22,80" Grid.RowSpan="2">
+            <Button Height="19" Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}"/>
+        </StackPanel>
     </Grid>
 </Window>
