@@ -8,41 +8,25 @@
         xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="479" Width="393"
-        WindowStartupLocation="CenterScreen"
+        Title="LoginWindow" Height="478" Width="374"
         AllowsTransparency="True"
-        WindowStyle="None" xmlns:uc="clr-namespace:FakeAtlas.CustomUIElements"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
     <WindowChrome.WindowChrome>
-        <WindowChrome 
-                      CornerRadius="{Binding WindowCornerRadius}"/>
-    </WindowChrome.WindowChrome>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="380*"/>
-            <ColumnDefinition Width="13*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <uc:InputTextBox x:Name="tbLogin" Text="{Binding SelectedAccount.UserName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="0" Margin="10,0,2,40"/>
-        <PasswordBox x:Name="tbPassword" FontSize="24" Grid.Row="3" Grid.Column="0" Margin="10,0,2,40"/>
-        <uc:PressButton Text="{DynamicResource m_SignIn}" Grid.Row="4" Margin="22,20,8,19" Command="{Binding ButtonCommand}" 
-                        Click="PressButton_Click" />
+        <WindowChrome/>
 
-        <uc:SignUpButton Text="{DynamicResource m_SignUp}" Margin="214,54,8,66" Grid.Row="4" Grid.RowSpan="2"
-                         Click="SignUpButton_Click"/>
-        <uc:SignUpPage x:Name="SignUpFrame" Grid.RowSpan="4" Grid.Row="1" Visibility="Collapsed" Grid.ColumnSpan="2"></uc:SignUpPage>
-        <Button Content="Sign Up" HorizontalAlignment="Left" Margin="174,45,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Button Content="Log In" HorizontalAlignment="Left" Margin="263,45,0,0" VerticalAlignment="Top" Click="Button_Click"
-                Command="{Binding LogInCommand}" CommandParameter="{Binding ElementName=tbPassword}" IsDefault="True"/>
-        <StackPanel Margin="293,55,22,80" Grid.RowSpan="2">
-            <Button Height="19" Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}"/>
-        </StackPanel>
-    </Grid>
+    </WindowChrome.WindowChrome>
+    <Border Background="WhiteSmoke">
+        <Canvas>
+            <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" Canvas.Left="131" Canvas.Top="10" FontFamily="Freehand521 BT" FontSize="24"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Canvas.Left="332" Height="35" Width="42">
+                <Button Style="{DynamicResource MinimizeButton}" WindowChrome.IsHitTestVisibleInChrome="True" Margin="4 3 3 2" Height="18"/>
+                <Button Style="{DynamicResource CloseButton}" WindowChrome.IsHitTestVisibleInChrome="True" Height="18" Width="17" RenderTransformOrigin="0.5,0.5"/>
+            </StackPanel>
+            <TextBox Canvas.Left="22" Canvas.Top="152" Text="TextBox" TextWrapping="Wrap" Width="331" Height="37"/>
+            <TextBox Canvas.Left="22" Canvas.Top="202" Text="TextBox" TextWrapping="Wrap" Width="331" Height="37"/>
+            <Button Content="Button" Canvas.Left="22" Canvas.Top="300" Width="331" Height="40"/>
+        </Canvas>
+    </Border>
 </Window>

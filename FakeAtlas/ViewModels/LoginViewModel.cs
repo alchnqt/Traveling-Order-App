@@ -26,22 +26,13 @@ namespace FakeAtlas.ViewModels
 
         #region Private members
         private LoginWindow _loginWindow;
-        /// <summary>
-        /// The margin around the window
-        /// </summary>
-        private int lOuterMarginSize = 10;
-        /// <summary>
-        /// The radius of edges of the window 
-        /// </summary>
-        private int lWindowRadius = 10;
         #endregion
         public LoginViewModel(LoginWindow loginWindow)
         {
             _loginWindow = loginWindow;
             _loginWindow.StateChanged += (sender, e) =>
             {
-                OnPropertyChanged(nameof(WindowRadius));
-                OnPropertyChanged(nameof(WindowCornerRadius));
+                OnPropertyChanged(nameof(Title));
             };
             LogInCommand = new RelayCommand(o => LoginClick());
             CloseCommand = new RelayCommand(o => CloseClick());
@@ -49,52 +40,8 @@ namespace FakeAtlas.ViewModels
         }
 
         #region Window properties
-        public int ResizeBorder { get; set; } = 6;
-
-        public Thickness ResizeBorderThikness { get { return new Thickness(ResizeBorder); } }
-        /// <summary>
-        /// The margin around the window
-        /// </summary>
-        public int OuterMarginSize
-        {
-            get
-            {
-                return _loginWindow.WindowState == WindowState.Maximized ? 0 : lOuterMarginSize;
-            }
-            set
-            {
-                lOuterMarginSize = value;
-            }
-        }
-        public Thickness OuterMarginSizeThickness
-        {
-            get
-            {
-                return new Thickness(OuterMarginSize);
-            }
-        }
-        /// <summary>
-        /// The radius of edges of the window 
-        /// </summary>
-        public int WindowRadius
-        {
-            get
-            {
-                return _loginWindow.WindowState == WindowState.Maximized ? 0 : lWindowRadius;
-            }
-            set
-            {
-                lWindowRadius = value;
-            }
-        }
-
-        public CornerRadius WindowCornerRadius
-        {
-            get
-            {
-                return new CornerRadius(OuterMarginSize);
-            }
-        }
+        private string _title;
+        public string Title { get => _title; set => _title = value; }
         #endregion
 
         UnitOfWork unitOfWork;
@@ -102,27 +49,27 @@ namespace FakeAtlas.ViewModels
         
         private void LoginClick()
         {
-            StringBuilder Sb = new StringBuilder();
-            using (var hash = SHA256.Create())
-            {
-                Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(_loginWindow.tbPassword.Password));
-                foreach (Byte b in result)
-                    Sb.Append(b.ToString("x2"));
-            }
-            try
-            {
-                var accessUser = (from user in unitOfWork.BookingUsers.GetAll()
-                                  where user.UserLogin == _loginWindow.tbLogin.Text
-                                  && user.UserPassword == Sb.ToString()
-                                  select user).Single();
+            //StringBuilder Sb = new StringBuilder();
+            //using (var hash = SHA256.Create())
+            //{
+            //    Encoding enc = Encoding.UTF8;
+            //    Byte[] result = hash.ComputeHash(enc.GetBytes(_loginWindow.tbPassword.Password));
+            //    foreach (Byte b in result)
+            //        Sb.Append(b.ToString("x2"));
+            //}
+            //try
+            //{
+            //    var accessUser = (from user in unitOfWork.BookingUsers.GetAll()
+            //                      where user.UserLogin == _loginWindow.tbLogin.Text
+            //                      && user.UserPassword == Sb.ToString()
+            //                      select user).Single();
 
-                MessageBox.Show("Connected!");
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
+            //    MessageBox.Show("Connected!");
+            //}
+            //catch(Exception e)
+            //{
+            //    MessageBox.Show(e.Message);
+            //}
         }
 
         public ICommand CloseCommand { get; set; }

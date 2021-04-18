@@ -26,25 +26,5 @@ namespace FakeAtlas.Views
             DataContext = new LoginViewModel(this);
         }
 
-        private void SignUpButton_Click(object sender, RoutedEventArgs e)
-        {
-           SignUpFrame.Visibility = Visibility.Visible;
-            
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           SignUpFrame.Visibility = Visibility.Collapsed;
-        }
-
-        private void PressButton_Click(object sender, RoutedEventArgs e)
-        {
-            tbLogin.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-        }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
