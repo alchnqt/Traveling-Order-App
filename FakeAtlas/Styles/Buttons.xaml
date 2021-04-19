@@ -2,8 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:FakeAtlas.Styles">
     <Style TargetType="{x:Type Button}" x:Key="InputButton">
-        <Setter Value="Template">
-            
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    
+                </ControlTemplate>
+            </Setter.Value>
         </Setter>
     </Style>
 </ResourceDictionary>
