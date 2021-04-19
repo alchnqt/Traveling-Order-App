@@ -19,13 +19,13 @@
     </WindowChrome.WindowChrome>
     <Border Background="WhiteSmoke">
         <Canvas>
-            <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" Canvas.Left="131" Canvas.Top="10" FontFamily="Freehand521 BT" FontSize="24"/>
+            <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" Canvas.Left="131" Canvas.Top="10" FontFamily="Segoe Script" FontSize="24"/>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Canvas.Left="332" Height="35" Width="42">
-                <Button Style="{DynamicResource MinimizeButton}" WindowChrome.IsHitTestVisibleInChrome="True" Margin="4 3 3 2" Height="18"/>
-                <Button Style="{DynamicResource CloseButton}" WindowChrome.IsHitTestVisibleInChrome="True" Height="18" Width="17" RenderTransformOrigin="0.5,0.5"/>
+                <Button Style="{DynamicResource MinimizeButton}" Command="{Binding MinimizeCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Margin="4 3 3 2" Height="18"/>
+                <Button Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="18" Width="17" RenderTransformOrigin="0.5,0.5"/>
             </StackPanel>
-            <TextBox Canvas.Left="22" Canvas.Top="152" Text="TextBox" TextWrapping="Wrap" Width="331" Height="37"/>
-            <TextBox Canvas.Left="22" Canvas.Top="202" Text="TextBox" TextWrapping="Wrap" Width="331" Height="37"/>
+            <TextBox Style="{DynamicResource InputTextBox}" Canvas.Left="22" Canvas.Top="148" Width="331" Height="37"/>
+            <PasswordBox Style="{DynamicResource InputPasswordBox}" Canvas.Left="22" Canvas.Top="202" Width="331" Height="37"/>
             <Button Content="Button" Canvas.Left="22" Canvas.Top="300" Width="331" Height="40"/>
         </Canvas>
     </Border>

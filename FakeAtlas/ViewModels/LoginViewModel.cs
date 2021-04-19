@@ -36,6 +36,7 @@ namespace FakeAtlas.ViewModels
             };
             LogInCommand = new RelayCommand(o => LoginClick());
             CloseCommand = new RelayCommand(o => CloseClick());
+            MinimizeCommand = new RelayCommand(o => MinimizeClick());
             unitOfWork = new UnitOfWork();
         }
 
@@ -77,6 +78,13 @@ namespace FakeAtlas.ViewModels
         private void CloseClick()
         {
             _loginWindow.Close();
+        }
+
+        public ICommand MinimizeCommand { get; set; }
+
+        private void MinimizeClick()
+        {
+            _loginWindow.WindowState = WindowState.Minimized;
         }
     }
 }

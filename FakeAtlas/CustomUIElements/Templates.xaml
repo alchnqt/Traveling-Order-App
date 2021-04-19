@@ -74,7 +74,4 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type TextBox}">
-        
-    </Style>
 </ResourceDictionary>
