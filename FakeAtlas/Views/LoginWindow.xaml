@@ -44,7 +44,12 @@
                 <PasswordBox Grid.Row="3" Grid.Column="1"  Height="30" VerticalAlignment="Top" x:Name="tbPasswordBox" Style="{DynamicResource InputPasswordBox}"/>
                 <Button  Grid.Row="4" Grid.Column="1" Height="45" Style="{DynamicResource InputButton}" Command="{Binding SignInCommand}" Content="{DynamicResource m_SignIn}" />
                 <Button  Grid.Row="5"  Grid.Column="1" VerticalAlignment="Top" Content="{DynamicResource m_SignUp}" Style="{DynamicResource SignUpButton}" Command="{Binding ShowSignUpCommand}" Background="#FF4169C7" />
-                <ce:SignUpPage x:Name="pageSignUp" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5" Background="#FF191E30" Visibility="Collapsed"/>
+                <ce:SignUpPage x:Name="pageSignUp" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5" Background="#FF191E30" 
+                               Visibility="{Binding SignUpVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Style="{DynamicResource BackwardButton}" Height="25" Width="30" Grid.Row="0" Grid.Column="0" 
+                        Visibility="{Binding BackwardVisibility, UpdateSourceTrigger=PropertyChanged}"
+                        Command="{Binding HideSignUpCommand}"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
     </Border>

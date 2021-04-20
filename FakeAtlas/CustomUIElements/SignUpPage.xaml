@@ -12,12 +12,11 @@
         <Canvas>
             <TextBox x:Name="tbLogin" Style="{DynamicResource InputTextBox}"
                                 Text="{Binding SelectedAccount.UserLogin, UpdateSourceTrigger=PropertyChanged}"
-                                Canvas.Left="10" Canvas.Top="90" Width="354"/>
-            <PasswordBox Style="{DynamicResource InputPasswordBox}" x:Name="tbPassword" Canvas.Left="10" Canvas.Top="148" Width="354"/>
-            <PasswordBox Style="{DynamicResource InputPasswordBox}" x:Name="tbPasswordRepeat" Canvas.Left="10" Canvas.Top="205" Width="354"/>
+                                Canvas.Left="10" Canvas.Top="90" Width="348"/>
+            <PasswordBox Style="{DynamicResource InputPasswordBox}" x:Name="tbPassword" Canvas.Left="10" Canvas.Top="148" Width="348"/>
+            <PasswordBox Style="{DynamicResource InputPasswordBox}" x:Name="tbPasswordRepeat" Canvas.Left="10" Canvas.Top="205" Width="348"/>
             <Button Style="{DynamicResource InputButton}" Command="{Binding SignUpCommand}"
-                Content="{DynamicResource m_SignUpPage}" Canvas.Left="10" Canvas.Top="274" Width="357" Height="41"/>
-            <Button Content="Go back" Style="{DynamicResource BackwardButton}" Click="Button_Click" RenderTransformOrigin="1.4,0.55" Height="25" Width="30"/>
+                Content="{DynamicResource m_SignUpPage}" Canvas.Left="10" Canvas.Top="274" Width="348" Height="41"/>
         </Canvas>
     </Grid>
 </UserControl>

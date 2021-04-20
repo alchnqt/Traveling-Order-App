@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FakeAtlas.Views;
-namespace FakeAtlas
+
+namespace FakeAtlas.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            Width = 518;
-            this.MaxHeight = 543;
-            MaxWidth = 518;
-            MinHeight = 543;
-            MinWidth = 518;
         }
     }
 }
