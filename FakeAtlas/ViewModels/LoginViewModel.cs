@@ -2,7 +2,9 @@
 using FakeAtlas.Context.UnitOfWork;
 using FakeAtlas.CustomUIElements;
 using FakeAtlas.Models;
+using FakeAtlas.ViewModels.Management;
 using FakeAtlas.Views;
+using Microsoft.VisualStudio.PlatformUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ using System.Windows.Input;
 
 namespace FakeAtlas.ViewModels
 {
-    public class LoginViewModel : BaseViewModel<Login>
+    public class LoginViewModel : BaseViewModel<Login>, ICloseWindow
     {
         #region Private members
         private LoginWindow _loginWindow;
@@ -23,8 +25,22 @@ namespace FakeAtlas.ViewModels
 
         private Visibility _isSignUpVisible = Visibility.Collapsed;
         private Visibility _isBacwardVisible = Visibility.Collapsed;
+        private Visibility _isWindowVisible = Visibility.Visible;
+
         #endregion
 
+        #region Bindings
+
+        
+        public Visibility WindowVisibility
+        {
+            get { return _isWindowVisible; }
+            set
+            {
+                _isWindowVisible = value;
+                OnPropertyChanged(nameof(WindowVisibility));
+            }
+        }
         public Visibility BackwardVisibility
         {
             get { return _isBacwardVisible; }
@@ -53,8 +69,8 @@ namespace FakeAtlas.ViewModels
                 OnPropertyChanged(nameof(SelectedAccount));
             }
         }
+        #endregion
 
-        
         public LoginViewModel(LoginWindow loginWindow)
         {
 
@@ -66,8 +82,6 @@ namespace FakeAtlas.ViewModels
                 OnPropertyChanged(nameof(BackwardVisibility));
             };
             SignInCommand = new RelayCommand(o => SignInClick());
-            CloseCommand = new RelayCommand(o => CloseClick());
-            MinimizeCommand = new RelayCommand(o => MinimizeClick());
             SignUpCommand = new RelayCommand(o => SignUpClick());
             ShowSignUpCommand = new RelayCommand(o => ShowSignUpClick());
             HideSignUpCommand = new RelayCommand(o => HideSignUpClick());
@@ -81,6 +95,9 @@ namespace FakeAtlas.ViewModels
         
         private void SignInClick()
         {
+            ProductionWindowFactory factory = new ProductionWindowFactory();
+            factory.CreateNewWindow();
+            CloseWindow();
             //StringBuilder Sb = new StringBuilder();
             //using (var hash = SHA256.Create())
             //{
@@ -103,20 +120,6 @@ namespace FakeAtlas.ViewModels
             //    MessageBox.Show(e.Message);
             //}
         }
-
-        public ICommand CloseCommand { get; set; }
-
-        private void CloseClick()
-        {
-            _loginWindow.Close();
-        }
-
-        public ICommand MinimizeCommand { get; set; }
-
-        private void MinimizeClick()
-        {
-            _loginWindow.WindowState = WindowState.Minimized;
-        }
         public ICommand ShowSignUpCommand { get; set; }
         private void ShowSignUpClick()
         {
@@ -136,12 +139,74 @@ namespace FakeAtlas.ViewModels
             }
         }
 
+        public ICommand HideSignUpCommand { get; set; }
         private void HideSignUpClick()
         {
             SignUpVisibility = Visibility.Collapsed;
             BackwardVisibility = Visibility.Collapsed;
         }
-        public ICommand HideSignUpCommand { get; set; }
+
+
+        private DelegateCommand _closeCommand;
+
+        public DelegateCommand CloseCommand => _closeCommand ?? (_closeCommand = new DelegateCommand(CloseWindow));
+
+        private void CloseWindow()
+        {
+            Close?.Invoke();
+        }
+        public bool CanClose()
+        {
+            return true;
+        }
+        
+        public Action Close { get; set; }
         #endregion
+    }
+
+    interface ICloseWindow
+    {
+        Action Close { get; set; }
+        bool CanClose();
+    }
+
+    public class WindowCloser
+    {
+
+
+        public static bool EnableWindowClosing(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(EnableWindowClosingProperty);
+        }
+
+        public static void SetEnableWindowClosingProperty(DependencyObject obj, bool value)
+        {
+            obj.SetValue(EnableWindowClosingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnableWindowClosingProperty =
+            DependencyProperty.RegisterAttached("EnableWindowClosing", typeof(bool), typeof(WindowCloser), new PropertyMetadata(false, OnEnableWindowsClosingChanged));
+
+        private static void OnEnableWindowsClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if(d is Window window)
+            {
+                window.Loaded += (s, e) =>
+                {
+                    if(window.DataContext is ICloseWindow vm)
+                    {
+                        vm.Close += () =>
+                        {
+                            window.Close();
+                        };
+                        window.Closing += (s, e) =>
+                        {
+                            e.Cancel = !vm.CanClose();
+                        };
+                    }
+                };
+            }
+        }
     }
 }
