@@ -24,7 +24,11 @@ namespace FakeAtlas.CustomUIElements
         public SignUpPage()
         {
             InitializeComponent();
-            DataContext = new SignUpViewModel(this);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
         }
     }
 }

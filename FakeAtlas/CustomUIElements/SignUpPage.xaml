@@ -3,19 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FakeAtlas.CustomUIElements" xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SignUpViewModel}"
+             xmlns:local="clr-namespace:FakeAtlas.CustomUIElements" 
+             xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="430" d:DesignWidth="393">
-    <Grid Background="Azure">
+             d:DesignHeight="430" d:DesignWidth="374">
+    <Grid Background="#FF3A3F52">
         <Canvas>
-            <local:InputTextBox x:Name="tbLogin" 
+            <TextBox x:Name="tbLogin" Style="{DynamicResource InputTextBox}"
                                 Text="{Binding SelectedAccount.UserLogin, UpdateSourceTrigger=PropertyChanged}"
-                                Background="Beige" Canvas.Left="10" Canvas.Top="90" Width="373"></local:InputTextBox>
-            <PasswordBox x:Name="tbPassword" Canvas.Left="10" Canvas.Top="148" Width="373"/>
-            <PasswordBox x:Name="tbPasswordRepeat" Canvas.Left="10" Canvas.Top="225" Width="373"/>
-            <local:PressButton Text="{DynamicResource m_SignUpPage}" Canvas.Left="10" Canvas.Top="338" Width="373"></local:PressButton>
-            <Button Content="Button" Canvas.Left="44" Canvas.Top="294" Command="{Binding SignUpCommand}" 
-                    CommandParameter="{Binding ElementName=tbPassword}" IsDefault="True"/>
+                                Canvas.Left="10" Canvas.Top="90" Width="354"/>
+            <PasswordBox Style="{DynamicResource InputPasswordBox}" x:Name="tbPassword" Canvas.Left="10" Canvas.Top="148" Width="354"/>
+            <PasswordBox Style="{DynamicResource InputPasswordBox}" x:Name="tbPasswordRepeat" Canvas.Left="10" Canvas.Top="205" Width="354"/>
+            <Button Style="{DynamicResource InputButton}" Command="{Binding SignUpCommand}"
+                Content="{DynamicResource m_SignUpPage}" Canvas.Left="10" Canvas.Top="324" Width="357" Height="41"/>
+            <Button Content="Go back" Style="{DynamicResource BackwardButton}" Click="Button_Click" RenderTransformOrigin="1.4,0.55" Height="25" Width="30"/>
         </Canvas>
     </Grid>
 </UserControl>

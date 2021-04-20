@@ -12,7 +12,7 @@
     <Color x:Key="SelectedBackgroundColor">#FFC5CBF9</Color>
     <Color x:Key="SelectedUnfocusedColor">#FFDDDDDD</Color>
 
-    <Color x:Key="ControlLightColor">White</Color>
+    <Color x:Key="ControlLightColor">#FFBFCDFF</Color>
     <Color x:Key="ControlMediumColor">#FF7381F9</Color>
     <Color x:Key="ControlDarkColor">#FF211AA9</Color>
 
@@ -45,12 +45,12 @@
     <LinearGradientBrush x:Key="MenuPopupBrush"
                      EndPoint="0.5,1"
                      StartPoint="0.5,0">
-        <GradientStop Color="{DynamicResource ControlLightColor}"
-                Offset="0" />
+        <GradientStop
+                Offset="0" Color="#FFB8BECA" />
         <GradientStop Color="{DynamicResource ControlMediumColor}"
                 Offset="0.5" />
-        <GradientStop Color="{DynamicResource ControlLightColor}"
-                Offset="1" />
+        <GradientStop
+                Offset="1" Color="#FFBFCDFF" />
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill"

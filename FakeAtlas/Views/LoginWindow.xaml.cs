@@ -19,7 +19,6 @@ namespace FakeAtlas.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public SecureString SecurePassword { private get; set; }
         public LoginWindow()
         {
             InitializeComponent();

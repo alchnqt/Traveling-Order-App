@@ -1,4 +1,5 @@
 ﻿using FakeAtlas.Context.UnitOfWork;
+using FakeAtlas.CustomUIElements;
 using FakeAtlas.Models;
 using FakeAtlas.Views;
 using System;
@@ -12,9 +13,9 @@ using System.Windows.Input;
 
 namespace FakeAtlas.ViewModels
 {
-    public class LoginViewModel : BaseViewModel<Login>
+    public class LoginViewModel : BaseViewModel<BookingUser>
     {
-        public Login SelectedAccount
+        public BookingUser SelectedAccount
         {
             get { return _objectViewModel; }
             set
@@ -32,45 +33,42 @@ namespace FakeAtlas.ViewModels
             _loginWindow = loginWindow;
             _loginWindow.StateChanged += (sender, e) =>
             {
-                OnPropertyChanged(nameof(Title));
+                OnPropertyChanged(nameof(SelectedAccount.UserLogin));
             };
-            LogInCommand = new RelayCommand(o => LoginClick());
+            SignInCommand = new RelayCommand(o => SignInClick());
             CloseCommand = new RelayCommand(o => CloseClick());
             MinimizeCommand = new RelayCommand(o => MinimizeClick());
+            SignUpCommand = new RelayCommand(o => SignUpClick());
+            ShowSignUpCommand = new RelayCommand(o => ShowSignUpClick());
             unitOfWork = new UnitOfWork();
         }
 
-        #region Window properties
-        private string _title;
-        public string Title { get => _title; set => _title = value; }
-        #endregion
-
         UnitOfWork unitOfWork;
-        public ICommand LogInCommand { get; set; }
+        public ICommand SignInCommand { get; set; }
         
-        private void LoginClick()
+        private void SignInClick()
         {
-            //StringBuilder Sb = new StringBuilder();
-            //using (var hash = SHA256.Create())
-            //{
-            //    Encoding enc = Encoding.UTF8;
-            //    Byte[] result = hash.ComputeHash(enc.GetBytes(_loginWindow.tbPassword.Password));
-            //    foreach (Byte b in result)
-            //        Sb.Append(b.ToString("x2"));
-            //}
-            //try
-            //{
-            //    var accessUser = (from user in unitOfWork.BookingUsers.GetAll()
-            //                      where user.UserLogin == _loginWindow.tbLogin.Text
-            //                      && user.UserPassword == Sb.ToString()
-            //                      select user).Single();
+            StringBuilder Sb = new StringBuilder();
+            using (var hash = SHA256.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(_loginWindow.tbPasswordBox.Password));
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+            try
+            {
+                var accessUser = (from user in unitOfWork.BookingUsers.GetAll()
+                                  where user.UserLogin == _objectViewModel.UserLogin
+                                  && user.UserPassword == Sb.ToString()
+                                  select user).Single();
 
-            //    MessageBox.Show("Connected!");
-            //}
-            //catch(Exception e)
-            //{
-            //    MessageBox.Show(e.Message);
-            //}
+                MessageBox.Show("Connected!");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         public ICommand CloseCommand { get; set; }
@@ -85,6 +83,34 @@ namespace FakeAtlas.ViewModels
         private void MinimizeClick()
         {
             _loginWindow.WindowState = WindowState.Minimized;
+        }
+
+        public ICommand ShowSignUpCommand { get; set; }
+        private void ShowSignUpClick()
+        {
+            SignUpPage page = new SignUpPage();
+            if (Grid.GetRow(page) != 1)
+            {
+                Grid.SetRow(page, 1);
+                _loginWindow.WindowGrid.Children.Add(page);
+            }
+            else
+            {
+                page.Visibility = Visibility.Visible;
+            }
+        }
+
+        public ICommand SignUpCommand { get; set; }
+        private void SignUpClick()
+        {
+            try
+            {
+                unitOfWork.BookingUsers.Create(new BookingUser {UserLogin = _objectViewModel.UserLogin, UserPassword = "1234"});
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }
