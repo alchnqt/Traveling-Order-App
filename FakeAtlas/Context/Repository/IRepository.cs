@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace FakeAtlas.Context.Repository
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<TEntity> where TEntity : class
     {
-        IEnumerable<T> GetAll();
-        T Get(int id);
-        void Create(T item);
-        void Update(T item);
-        void Delete(int id);
+        void Create(TEntity item);
+        TEntity FindById(int id);
+        IEnumerable<TEntity> Get();
+        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
+        void Remove(TEntity item);
+        void Update(TEntity item);
     }
 }

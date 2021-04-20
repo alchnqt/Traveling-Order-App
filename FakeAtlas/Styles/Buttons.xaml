@@ -84,4 +84,62 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="CloseButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Opacity" Value="0.75" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" Background="Transparent">
+                        <Path x:Name="Pt" Data="M0,0 M0.2,0.2 L 0.8,0.8 M0.2,0.8 L0.8,0.2 M1,1"
+                      Stretch="Uniform" StrokeThickness="2">
+                            <Path.Stroke>
+                                <SolidColorBrush Color="{DynamicResource BorderMediumColor}"/>
+                            </Path.Stroke>
+                        </Path>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="Red"/>
+                            <Setter TargetName="Pt" Property="Stroke" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.55" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="MinimizeButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Opacity" Value="0.75" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" Background="Transparent">
+                        <Path x:Name="Pt" Data="F1M14,11L2,11"
+                      Stretch="Uniform" StrokeThickness="2">
+                            <Path.Stroke>
+                                <SolidColorBrush Color="{DynamicResource BorderMediumColor}"/>
+                            </Path.Stroke>
+                        </Path>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#FF838383"/>
+                            <Setter TargetName="Pt" Property="Stroke" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.55" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

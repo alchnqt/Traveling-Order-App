@@ -1,4 +1,5 @@
-﻿using FakeAtlas.Context.UnitOfWork;
+﻿using FakeAtlas.Context.Repository;
+using FakeAtlas.Context.UnitOfWork;
 using FakeAtlas.CustomUIElements;
 using FakeAtlas.Models;
 using FakeAtlas.Views;
@@ -27,6 +28,8 @@ namespace FakeAtlas.ViewModels
 
         #region Private members
         private LoginWindow _loginWindow;
+        private UnitOfWork unitOfWork;
+        private BookingDBRepository<BookingUser> userRepository;
         #endregion
         public LoginViewModel(LoginWindow loginWindow)
         {
@@ -42,8 +45,6 @@ namespace FakeAtlas.ViewModels
             ShowSignUpCommand = new RelayCommand(o => ShowSignUpClick());
             unitOfWork = new UnitOfWork();
         }
-
-        UnitOfWork unitOfWork;
         public ICommand SignInCommand { get; set; }
         
         private void SignInClick()
@@ -58,7 +59,7 @@ namespace FakeAtlas.ViewModels
             }
             try
             {
-                var accessUser = (from user in unitOfWork.BookingUsers.GetAll()
+                var accessUser = (from user in unitOfWork.BookingUsers.Get()
                                   where user.UserLogin == _objectViewModel.UserLogin
                                   && user.UserPassword == Sb.ToString()
                                   select user).Single();
@@ -84,20 +85,10 @@ namespace FakeAtlas.ViewModels
         {
             _loginWindow.WindowState = WindowState.Minimized;
         }
-
         public ICommand ShowSignUpCommand { get; set; }
         private void ShowSignUpClick()
         {
-            SignUpPage page = new SignUpPage();
-            if (Grid.GetRow(page) != 1)
-            {
-                Grid.SetRow(page, 1);
-                _loginWindow.WindowGrid.Children.Add(page);
-            }
-            else
-            {
-                page.Visibility = Visibility.Visible;
-            }
+            _loginWindow.pageSignUp.Visibility = Visibility.Visible;
         }
 
         public ICommand SignUpCommand { get; set; }

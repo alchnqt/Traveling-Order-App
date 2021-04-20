@@ -28,7 +28,7 @@ namespace FakeAtlas.CustomUIElements
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Hidden;
+            this.Visibility = Visibility.Collapsed;
         }
     }
 }

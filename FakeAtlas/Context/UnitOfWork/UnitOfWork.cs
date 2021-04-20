@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace FakeAtlas.Context.UnitOfWork
 {
-   public class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable
     {
         private BookingDBContext db = new BookingDBContext();
-        private BookingUserRepository bookRepository;
+        private BookingDBRepository<BookingUser> userRepository;
 
-        public BookingUserRepository BookingUsers
+        public BookingDBRepository<BookingUser> BookingUsers
         {
             get
             {
-                if (bookRepository == null)
-                    bookRepository = new BookingUserRepository(db);
-                return bookRepository;
+                if (userRepository == null)
+                    userRepository = new BookingDBRepository<BookingUser>(db);
+                return userRepository;
             }
         }
 
@@ -48,3 +48,4 @@ namespace FakeAtlas.Context.UnitOfWork
         }
     }
 }
+

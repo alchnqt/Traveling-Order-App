@@ -7,8 +7,8 @@
              xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" 
              d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="430" d:DesignWidth="374">
-    <Grid Background="#FF3A3F52">
+             d:DesignHeight="370" d:DesignWidth="374" Panel.ZIndex="10">
+    <Grid>
         <Canvas>
             <TextBox x:Name="tbLogin" Style="{DynamicResource InputTextBox}"
                                 Text="{Binding SelectedAccount.UserLogin, UpdateSourceTrigger=PropertyChanged}"
@@ -16,7 +16,7 @@
             <PasswordBox Style="{DynamicResource InputPasswordBox}" x:Name="tbPassword" Canvas.Left="10" Canvas.Top="148" Width="354"/>
             <PasswordBox Style="{DynamicResource InputPasswordBox}" x:Name="tbPasswordRepeat" Canvas.Left="10" Canvas.Top="205" Width="354"/>
             <Button Style="{DynamicResource InputButton}" Command="{Binding SignUpCommand}"
-                Content="{DynamicResource m_SignUpPage}" Canvas.Left="10" Canvas.Top="324" Width="357" Height="41"/>
+                Content="{DynamicResource m_SignUpPage}" Canvas.Left="10" Canvas.Top="274" Width="357" Height="41"/>
             <Button Content="Go back" Style="{DynamicResource BackwardButton}" Click="Button_Click" RenderTransformOrigin="1.4,0.55" Height="25" Width="30"/>
         </Canvas>
     </Grid>
