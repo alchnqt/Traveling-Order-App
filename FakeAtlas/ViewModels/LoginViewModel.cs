@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace FakeAtlas.ViewModels
 {
-    public class LoginViewModel : BaseViewModel<Login>, ICloseWindow
+    public class LoginViewModel : BaseViewModel<Login>, ICloseWindow, IMinimizeWindow
     {
         #region Private members
         private LoginWindow _loginWindow;
@@ -159,11 +159,75 @@ namespace FakeAtlas.ViewModels
         {
             return true;
         }
-        
         public Action Close { get; set; }
+
+        private DelegateCommand _minimizeCommand;
+
+        public DelegateCommand MinimizeCommand => _minimizeCommand ?? (_minimizeCommand = new DelegateCommand(MinimizeWindow));
+
+        private void MinimizeWindow()
+        {
+            Minimize?.Invoke();
+        }
+        public bool CanMinimize()
+        {
+            return true;
+        }
+        public Action Minimize { get; set; }
+
+
         #endregion
     }
 
+    #region delegate minimize
+    interface IMinimizeWindow
+    {
+        Action Minimize { get; set; }
+        bool CanMinimize();
+    }
+
+    public class WindowMinimizer
+    {
+
+
+        public static bool EnableWindowMinimizing(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(EnableWindowMinimizingProperty);
+        }
+
+        public static void SetEnableWindowMinimizingProperty(DependencyObject obj, bool value)
+        {
+            obj.SetValue(EnableWindowMinimizingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnableWindowMinimizingProperty =
+            DependencyProperty.RegisterAttached("EnableWindowMinimizing", typeof(bool), typeof(WindowMinimizer), new PropertyMetadata(false, OnEnableWindowsMinimizingChanged));
+
+        private static void OnEnableWindowsMinimizingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Window window)
+            {
+                window.Loaded += (s, e) =>
+                {
+                    if (window.DataContext is IMinimizeWindow vm)
+                    {
+                        vm.Minimize += () =>
+                        {
+                            window.WindowState = WindowState.Minimized;
+                        };
+                        window.Closing += (s, e) =>
+                        {
+                            e.Cancel = !vm.CanMinimize();
+                        };
+                    }
+                };
+            }
+        }
+    }
+    #endregion
+
+    #region delegate closing
     interface ICloseWindow
     {
         Action Close { get; set; }
@@ -209,4 +273,6 @@ namespace FakeAtlas.ViewModels
             }
         }
     }
+
+    #endregion
 }
