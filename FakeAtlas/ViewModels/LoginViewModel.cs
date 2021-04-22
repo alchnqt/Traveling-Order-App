@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace FakeAtlas.ViewModels
 {
-    public class LoginViewModel : BaseViewModel<Login>, ICloseWindow, IMinimizeWindow
+    public class LoginViewModel : BaseViewModel<Login>
     {
         #region Private members
         private LoginWindow _loginWindow;
@@ -145,134 +145,6 @@ namespace FakeAtlas.ViewModels
             SignUpVisibility = Visibility.Collapsed;
             BackwardVisibility = Visibility.Collapsed;
         }
-
-
-        private DelegateCommand _closeCommand;
-
-        public DelegateCommand CloseCommand => _closeCommand ?? (_closeCommand = new DelegateCommand(CloseWindow));
-
-        private void CloseWindow()
-        {
-            Close?.Invoke();
-        }
-        public bool CanClose()
-        {
-            return true;
-        }
-        public Action Close { get; set; }
-
-        private DelegateCommand _minimizeCommand;
-
-        public DelegateCommand MinimizeCommand => _minimizeCommand ?? (_minimizeCommand = new DelegateCommand(MinimizeWindow));
-
-        private void MinimizeWindow()
-        {
-            Minimize?.Invoke();
-        }
-        public bool CanMinimize()
-        {
-            return true;
-        }
-        public Action Minimize { get; set; }
-
-
         #endregion
     }
-
-    #region delegate minimize
-    interface IMinimizeWindow
-    {
-        Action Minimize { get; set; }
-        bool CanMinimize();
-    }
-
-    public class WindowMinimizer
-    {
-
-
-        public static bool EnableWindowMinimizing(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(EnableWindowMinimizingProperty);
-        }
-
-        public static void SetEnableWindowMinimizingProperty(DependencyObject obj, bool value)
-        {
-            obj.SetValue(EnableWindowMinimizingProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty EnableWindowMinimizingProperty =
-            DependencyProperty.RegisterAttached("EnableWindowMinimizing", typeof(bool), typeof(WindowMinimizer), new PropertyMetadata(false, OnEnableWindowsMinimizingChanged));
-
-        private static void OnEnableWindowsMinimizingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is Window window)
-            {
-                window.Loaded += (s, e) =>
-                {
-                    if (window.DataContext is IMinimizeWindow vm)
-                    {
-                        vm.Minimize += () =>
-                        {
-                            window.WindowState = WindowState.Minimized;
-                        };
-                        window.Closing += (s, e) =>
-                        {
-                            e.Cancel = !vm.CanMinimize();
-                        };
-                    }
-                };
-            }
-        }
-    }
-    #endregion
-
-    #region delegate closing
-    interface ICloseWindow
-    {
-        Action Close { get; set; }
-        bool CanClose();
-    }
-
-    public class WindowCloser
-    {
-
-
-        public static bool EnableWindowClosing(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(EnableWindowClosingProperty);
-        }
-
-        public static void SetEnableWindowClosingProperty(DependencyObject obj, bool value)
-        {
-            obj.SetValue(EnableWindowClosingProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty EnableWindowClosingProperty =
-            DependencyProperty.RegisterAttached("EnableWindowClosing", typeof(bool), typeof(WindowCloser), new PropertyMetadata(false, OnEnableWindowsClosingChanged));
-
-        private static void OnEnableWindowsClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if(d is Window window)
-            {
-                window.Loaded += (s, e) =>
-                {
-                    if(window.DataContext is ICloseWindow vm)
-                    {
-                        vm.Close += () =>
-                        {
-                            window.Close();
-                        };
-                        window.Closing += (s, e) =>
-                        {
-                            e.Cancel = !vm.CanClose();
-                        };
-                    }
-                };
-            }
-        }
-    }
-
-    #endregion
 }

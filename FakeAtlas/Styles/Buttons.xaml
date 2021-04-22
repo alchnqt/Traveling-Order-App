@@ -92,7 +92,7 @@
         <Setter Property="Template" x:Name="tm">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd" Background="Transparent">
+                    <Border x:Name="Bd" Background="Transparent" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
                         <Path x:Name="Pt" Data="M0,0 M0.2,0.2 L 0.8,0.8 M0.2,0.8 L0.8,0.2 M1,1"
                       Stretch="Uniform" StrokeThickness="2">
                             <Path.Stroke>
@@ -121,7 +121,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd" Background="Transparent">
+                    <Border x:Name="Bd" Background="Transparent" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
                         <Path x:Name="Pt" Data="F1M14,11L2,11"
                       Stretch="Uniform" StrokeThickness="2">
                             <Path.Stroke>
@@ -150,10 +150,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd" 
+                    <Border x:Name="Bd" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
                 BorderBrush="#FF838383"
-                Width="{TemplateBinding Width}"
-                Height="{TemplateBinding Height}"
                 BorderThickness="1,3,1,1" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">

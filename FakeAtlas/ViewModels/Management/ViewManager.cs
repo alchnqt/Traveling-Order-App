@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FakeAtlas.ViewModels.Management
@@ -43,4 +44,148 @@ namespace FakeAtlas.ViewModels.Management
             window.Show();
         }
     }
+
+    #region delegate minimize
+    interface IMinimizeWindow
+    {
+        Action Minimize { get; set; }
+        bool CanMinimize();
+    }
+
+    public class WindowMinimizer
+    {
+        public static bool EnableWindowMinimizing(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(EnableWindowMinimizingProperty);
+        }
+
+        public static void SetEnableWindowMinimizingProperty(DependencyObject obj, bool value)
+        {
+            obj.SetValue(EnableWindowMinimizingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnableWindowMinimizingProperty =
+            DependencyProperty.RegisterAttached("EnableWindowMinimizing", typeof(bool), typeof(WindowMinimizer), new PropertyMetadata(false, OnEnableWindowsMinimizingChanged));
+
+        private static void OnEnableWindowsMinimizingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Window window)
+            {
+                window.Loaded += (s, e) =>
+                {
+                    if (window.DataContext is IMinimizeWindow vm)
+                    {
+                        vm.Minimize += () =>
+                        {
+                            window.WindowState = WindowState.Minimized;
+                        };
+                        window.Closing += (s, e) =>
+                        {
+                            e.Cancel = !vm.CanMinimize();
+                        };
+                    }
+                };
+            }
+        }
+    }
+    #endregion
+
+    #region delegate closing
+    interface ICloseWindow
+    {
+        Action Close { get; set; }
+        bool CanClose();
+    }
+
+    public class WindowCloser
+    {
+
+
+        public static bool EnableWindowClosing(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(EnableWindowClosingProperty);
+        }
+
+        public static void SetEnableWindowClosingProperty(DependencyObject obj, bool value)
+        {
+            obj.SetValue(EnableWindowClosingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnableWindowClosingProperty =
+            DependencyProperty.RegisterAttached("EnableWindowClosing", typeof(bool), typeof(WindowCloser), new PropertyMetadata(false, OnEnableWindowsClosingChanged));
+
+        private static void OnEnableWindowsClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Window window)
+            {
+                window.Loaded += (s, e) =>
+                {
+                    if (window.DataContext is ICloseWindow vm)
+                    {
+                        vm.Close += () =>
+                        {
+                            window.Close();
+                        };
+                        window.Closing += (s, e) =>
+                        {
+                            e.Cancel = !vm.CanClose();
+                        };
+                    }
+                };
+            }
+        }
+    }
+
+    #endregion
+
+    #region delegate Maximize
+    interface IMaximizeWindow
+    {
+        Action Close { get; set; }
+        bool CanMaximize();
+    }
+
+    public class WindowMaximizer
+    {
+
+
+        public static bool EnableWindowClosing(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(EnableWindowClosingProperty);
+        }
+
+        public static void SetEnableWindowClosingProperty(DependencyObject obj, bool value)
+        {
+            obj.SetValue(EnableWindowClosingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnableWindowClosingProperty =
+            DependencyProperty.RegisterAttached("EnableWindowClosing", typeof(bool), typeof(WindowCloser), new PropertyMetadata(false, OnEnableWindowsClosingChanged));
+
+        private static void OnEnableWindowsClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Window window)
+            {
+                window.Loaded += (s, e) =>
+                {
+                    if (window.DataContext is ICloseWindow vm)
+                    {
+                        vm.Close += () =>
+                        {
+                            window.WindowState = WindowState.Maximized;
+                        };
+                        window.Closing += (s, e) =>
+                        {
+                            e.Cancel = !vm.CanClose();
+                        };
+                    }
+                };
+            }
+        }
+    }
+
+    #endregion
 }
