@@ -143,7 +143,7 @@ namespace FakeAtlas.ViewModels.Management
     #region delegate Maximize
     interface IMaximizeWindow
     {
-        Action Close { get; set; }
+        Action Maximize { get; set; }
         bool CanMaximize();
     }
 
@@ -151,35 +151,35 @@ namespace FakeAtlas.ViewModels.Management
     {
 
 
-        public static bool EnableWindowClosing(DependencyObject obj)
+        public static bool EnableWindowMaximizing(DependencyObject obj)
         {
-            return (bool)obj.GetValue(EnableWindowClosingProperty);
+            return (bool)obj.GetValue(EnableWindowMaximizingProperty);
         }
 
-        public static void SetEnableWindowClosingProperty(DependencyObject obj, bool value)
+        public static void SetEnableWindowMaximizingProperty(DependencyObject obj, bool value)
         {
-            obj.SetValue(EnableWindowClosingProperty, value);
+            obj.SetValue(EnableWindowMaximizingProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty EnableWindowClosingProperty =
-            DependencyProperty.RegisterAttached("EnableWindowClosing", typeof(bool), typeof(WindowCloser), new PropertyMetadata(false, OnEnableWindowsClosingChanged));
+        public static readonly DependencyProperty EnableWindowMaximizingProperty =
+            DependencyProperty.RegisterAttached("EnableWindowMaximizing", typeof(bool), typeof(WindowMaximizer), new PropertyMetadata(false, OnEnableWindowsMaximizingChanged));
 
-        private static void OnEnableWindowsClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnEnableWindowsMaximizingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is Window window)
             {
                 window.Loaded += (s, e) =>
                 {
-                    if (window.DataContext is ICloseWindow vm)
+                    if (window.DataContext is IMaximizeWindow vm)
                     {
-                        vm.Close += () =>
+                        vm.Maximize += () =>
                         {
                             window.WindowState = WindowState.Maximized;
                         };
                         window.Closing += (s, e) =>
                         {
-                            e.Cancel = !vm.CanClose();
+                            e.Cancel = !vm.CanMaximize();
                         };
                     }
                 };

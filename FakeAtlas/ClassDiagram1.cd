@@ -11,28 +11,28 @@
     <Position X="12" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAECAAAAAAAAAIAAAAAAAAAACAAgAAAAAAAAAAIAAAA=</HashCode>
-      <FileName>Models\BookingUser.cs</FileName>
+      <FileName>Models\Entities\BookingUser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.Order" Collapsed="true">
     <Position X="8.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAEAAAAAoEAACAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
-      <FileName>Models\Order.cs</FileName>
+      <FileName>Models\Entities\Order.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.Shipper" Collapsed="true">
     <Position X="13.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAECAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
-      <FileName>Models\Shipper.cs</FileName>
+      <FileName>Models\Entities\Shipper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.UniqueAddress" Collapsed="true">
     <Position X="12" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAACAAAAAAAAAACIAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
-      <FileName>Models\UniqueAddress.cs</FileName>
+      <FileName>Models\Entities\UniqueAddress.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.App" Collapsed="true">
@@ -61,7 +61,7 @@
   <Class Name="FakeAtlas.Context.UnitOfWork.UnitOfWork" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="13.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAIAAACAQAAAAAAAAAAAAgAAAAAAAAAAAAAAAAEA=</HashCode>
+      <HashCode>AAIAAIAAACAQAAAAAAAAAAAAAAAAAAAAAAAAAIAAAEA=</HashCode>
       <FileName>Context\UnitOfWork\UnitOfWork.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -108,7 +108,7 @@
   <Class Name="FakeAtlas.Models.Login" Collapsed="true">
     <Position X="3.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>Models\Login.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -121,9 +121,9 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="FakeAtlas.ViewModels.BaseViewModel&lt;T&gt;" Collapsed="true">
-    <Position X="5" Y="0.5" Width="1.5" />
+    <Position X="5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABIAAAAAAAAAAAAAIgAABAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>UBEAAEEAAAAAQAAAIAAAAEAAgAAAAgAAAQJCAACAAgI=</HashCode>
       <FileName>ViewModels\BaseViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -131,7 +131,7 @@
   <Class Name="FakeAtlas.ViewModels.LoginViewModel" Collapsed="true">
     <Position X="6" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AYAEAAAAEAAAAAAAAAEAQAGBAAIAAAIAAAEAAAAACAA=</HashCode>
+      <HashCode>AAAEQiAAEAAQAgAiAAAAAACIgAAAAAAAAgACAQQAAAA=</HashCode>
       <FileName>ViewModels\LoginViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -153,15 +153,15 @@
   <Class Name="FakeAtlas.Views.LoginWindow" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="12" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAQAAAAAAAAAEAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\LoginWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Interface Name="FakeAtlas.Context.Repository.IRepository&lt;T&gt;" Collapsed="true">
+  <Interface Name="FakeAtlas.Context.Repository.IRepository&lt;TEntity&gt;" Collapsed="true">
     <Position X="8.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAABAAAAAAAAAAAEAAEAAAgAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAABAAAAABAAAAAABAEAAAAAAAAAAAAA=</HashCode>
       <FileName>Context\Repository\IRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>

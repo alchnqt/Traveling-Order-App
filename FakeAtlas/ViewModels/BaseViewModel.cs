@@ -9,7 +9,7 @@ using System.Text;
 
 namespace FakeAtlas.ViewModels
 {
-    public class BaseViewModel<T> : INotifyPropertyChanged, IViewModel, ICloseWindow, IMinimizeWindow
+    public class BaseViewModel<T> : INotifyPropertyChanged, IViewModel, ICloseWindow, IMinimizeWindow, IMaximizeWindow
     {
         protected T _objectViewModel;
         /// <summary>
@@ -18,11 +18,13 @@ namespace FakeAtlas.ViewModels
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
         public void OnPropertyChanged([CallerMemberName] string prop = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 
+        #region Basic Commands
+
         private DelegateCommand _closeCommand;
 
         public DelegateCommand CloseCommand => _closeCommand ?? (_closeCommand = new DelegateCommand(CloseWindow));
 
-        private void CloseWindow()
+        protected void CloseWindow()
         {
             Close?.Invoke();
         }
@@ -44,6 +46,22 @@ namespace FakeAtlas.ViewModels
         {
             return true;
         }
+        public Action Maximize { get; set; }
+
+        private DelegateCommand _maximizeCommand;
+
+        public DelegateCommand MaximizeCommand => _maximizeCommand ?? (_maximizeCommand = new DelegateCommand(MaximizeWindow));
+
+        private void MaximizeWindow()
+        {
+            Maximize?.Invoke();
+        }
+        public bool CanMaximize()
+        {
+            return true;
+        }
         public Action Minimize { get; set; }
+
+        #endregion
     }
 }

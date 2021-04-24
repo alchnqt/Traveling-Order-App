@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FakeAtlas.Models
 {
-    public class MainWindowViewModel : ObjectModel
+    public class MainWindowModel : ObjectModel
     {
 
     }

@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FakeAtlas.Views" xmlns:ce="clr-namespace:FakeAtlas.CustomUIElements"
+        xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels"
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        xmlns:vmm ="clr-namespace:FakeAtlas.ViewModels.Management"
+        vmm:WindowCloser.EnableWindowClosingProperty="True" vmm:WindowMinimizer.EnableWindowMinimizingProperty="True"
+        vmm:WindowMaximizer.EnableWindowMaximizingProperty="True"
         Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <WindowChrome.WindowChrome>
         <WindowChrome/>
@@ -29,9 +34,9 @@
                 <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" FontFamily="Segoe Script" HorizontalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="1" Width="168"/>
                 <StackPanel DockPanel.Dock="Top" Width="122" Height="37" Orientation="Horizontal" HorizontalAlignment="Right"
                             VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="0">
-                    <Button Style="{DynamicResource MinimizeButton}" Command="{x:Static SystemCommands.MinimizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="15" Width="15" Margin="14"/>
-                    <Button Style="{DynamicResource MaximizeButton}" Command="{x:Static SystemCommands.MinimizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="13" Width="13" Margin="10"/>
-                    <Button Style="{DynamicResource CloseButton}" Command="{x:Static SystemCommands.CloseWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="18" Width="17" Margin="10"/>
+                    <Button Style="{DynamicResource MinimizeButton}" Command="{Binding MinimizeCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="15" Width="15" Margin="14"/>
+                    <Button Style="{DynamicResource MaximizeButton}" Command="{Binding MaximizeCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="13" Width="13" Margin="10"/>
+                    <Button Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="18" Width="17" Margin="10"/>
                 </StackPanel>
             </Grid>
         </Border>

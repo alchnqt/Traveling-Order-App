@@ -4,15 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ce ="clr-namespace:FakeAtlas.CustomUIElements"
-        xmlns:local="clr-namespace:FakeAtlas.Views" 
+        
         xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" 
+        xmlns:vmm ="clr-namespace:FakeAtlas.ViewModels.Management"
         d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
         mc:Ignorable="d"
         Title="LoginWindow" Height="478" Width="374"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"
-        x:Name="signUpPage" viewmodels:WindowCloser.EnableWindowClosingProperty="True" viewmodels:WindowMinimizer.EnableWindowMinimizingProperty="True">
+        x:Name="signUpPage" vmm:WindowCloser.EnableWindowClosingProperty="True" vmm:WindowMinimizer.EnableWindowMinimizingProperty="True">
     <WindowChrome.WindowChrome>
         <WindowChrome/>
 
