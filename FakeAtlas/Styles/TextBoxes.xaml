@@ -4,7 +4,7 @@
     <Style TargetType="{x:Type TextBox}" x:Key="InputTextBox">
         <Setter Property="SnapsToDevicePixels"
           Value="True" />
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontSize" Value="19"/>
         <Setter Property="OverridesDefaultStyle"
           Value="True" />
         <Setter Property="KeyboardNavigation.TabNavigation"

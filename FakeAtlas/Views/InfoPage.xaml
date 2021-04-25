@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="FakeAtlas.Views.InfoPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FakeAtlas.Views"
+             xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewmodels:BookingUserViewModel}">
+    <Grid>
+        <DockPanel Background="AliceBlue">
+            <WrapPanel Orientation="Vertical">
+                <TextBox IsReadOnly="True" DockPanel.Dock="left" Text="Name"/>
+                <TextBox IsReadOnly="True" DockPanel.Dock="Top"  Text="LastName"/>
+                <TextBox IsReadOnly="True" DockPanel.Dock="Top"  Text="Address"/>
+                <TextBox IsReadOnly="True" DockPanel.Dock="Top"  Text="Orders"/>
+            </WrapPanel>
+            <TextBox IsReadOnly="True" DockPanel.Dock="Top" Text="Name"/>
+            <TextBox IsReadOnly="True" DockPanel.Dock="Top" Text="LastName"/>
+            <TextBox IsReadOnly="True" DockPanel.Dock="Top" Text="Address"/>
+            <ListBox ItemsSource="{Binding orders}"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

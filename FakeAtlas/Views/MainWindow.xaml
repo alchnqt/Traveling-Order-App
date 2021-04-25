@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FakeAtlas.Views" xmlns:ce="clr-namespace:FakeAtlas.CustomUIElements"
+        xmlns:local="clr-namespace:FakeAtlas.Views"
         xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels"
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
@@ -15,30 +15,66 @@
     <WindowChrome.WindowChrome>
         <WindowChrome/>
     </WindowChrome.WindowChrome>
+    <Window.Resources>
+        
+    </Window.Resources>
     <Border BorderBrush="Black" BorderThickness="1">
         <Border Background="#FF191E30" BorderBrush="#FF4F5A66" BorderThickness="1">
-            <Grid x:Name="WindowGrid">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition Height="3"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="149*"/>
-                    <ColumnDefinition Width="18*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" FontFamily="Segoe Script" HorizontalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="1" Width="168"/>
-                <StackPanel DockPanel.Dock="Top" Width="122" Height="37" Orientation="Horizontal" HorizontalAlignment="Right"
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Left" Width="173">
+                    <StackPanel DockPanel.Dock="Left" Margin="6,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="5" Grid.ColumnSpan="2" Grid.Row="1" Height="250" Width="301">
+                        <Button HorizontalAlignment="Left" Command="{Binding InfoCommand}"
+                                Style="{DynamicResource LiteralButton}" Height="50" Width="150" FontSize="20" WindowChrome.IsHitTestVisibleInChrome="True">
+                            <TextBlock Text="{DynamicResource m_Info}" TextWrapping="Wrap"/>
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                 Storyboard.TargetName="Pages"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 From="0.5" To="1.0" Duration="0:0:1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button HorizontalAlignment="Left" Command="{Binding FindCommand}" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Find}" Height="50" FontSize="20"/>
+                        <Button HorizontalAlignment="Left" Command="{Binding OrdersCommand}" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_History}" Height="50" FontSize="20">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                 Storyboard.TargetName="Pages"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 From="0.3" To="1.0" Duration="0:0:1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button HorizontalAlignment="Left"  Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Help}" Height="50" FontSize="20"/>
+                        <Button HorizontalAlignment="Left"  Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_SignOut}" Height="50" FontSize="20"/>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" FontFamily="Segoe Script" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6" FontSize="30" Grid.Row="0" Grid.Column="0" Width="168" Grid.ColumnSpan="2" Height="48"/>
+                    <StackPanel Width="122" Height="37" Orientation="Horizontal" HorizontalAlignment="Right"
                             VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="0">
-                    <Button Style="{DynamicResource MinimizeButton}" Command="{Binding MinimizeCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="15" Width="15" Margin="14"/>
-                    <Button Style="{DynamicResource MaximizeButton}" Command="{Binding MaximizeCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="13" Width="13" Margin="10"/>
-                    <Button Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="18" Width="17" Margin="10"/>
-                </StackPanel>
-            </Grid>
+                        <Button Style="{DynamicResource MinimizeButton}" Command="{Binding MinimizeCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="15" Width="15" Margin="14"/>
+                        <Button Style="{DynamicResource MaximizeButton}" Command="{Binding MaximizeCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="13" Width="13" Margin="10">
+                            
+                        </Button>
+                        <Button Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Height="18" Width="17" Margin="10"/>
+                    </StackPanel>
+                </DockPanel>
+                <ContentControl x:Name="Pages" DockPanel.Dock="Left" Content="{Binding SelectedViewModel, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1"
+                                Grid.RowSpan="7">
+                    <ContentControl.Triggers>
+                    </ContentControl.Triggers>
+                </ContentControl>
+            </DockPanel>
         </Border>
     </Border>
 </Window>

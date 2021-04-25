@@ -6,4 +6,6 @@
     <v:String x:Key="m_Password">Password</v:String>
     <v:String x:Key="m_InputPassword">input password</v:String>
     <v:String x:Key="m_InputLogin">input login</v:String>
+    <v:String x:Key="m_Find">Find route</v:String>
+    <v:String x:Key="m_Help">Help</v:String>
 </ResourceDictionary>

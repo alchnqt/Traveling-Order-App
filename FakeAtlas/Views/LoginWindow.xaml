@@ -3,16 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ce ="clr-namespace:FakeAtlas.CustomUIElements"
+        xmlns:ce ="clr-namespace:FakeAtlas.Views"
         
         xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" 
-        xmlns:vmm ="clr-namespace:FakeAtlas.ViewModels.Management"
+        xmlns:vmm ="clr-namespace:FakeAtlas.ViewModels.Management" xmlns:ce1="clr-namespace:FakeAtlas.Views"
         d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
         mc:Ignorable="d"
         Title="LoginWindow" Height="478" Width="374"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"
+        
         x:Name="signUpPage" vmm:WindowCloser.EnableWindowClosingProperty="True" vmm:WindowMinimizer.EnableWindowMinimizingProperty="True">
     <WindowChrome.WindowChrome>
         <WindowChrome/>
@@ -41,16 +42,14 @@
                     <Label Width="12"/>
                     <Button Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}" VerticalAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Height="18" Width="17"/>
                 </StackPanel>
-                <TextBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource InputTextBox}" Text="{Binding SelectedAccount.UserLogin, UpdateSourceTrigger=PropertyChanged}"/>
-                <PasswordBox Grid.Row="3" Grid.Column="1"  Height="30" VerticalAlignment="Top" x:Name="tbPasswordBox" Style="{DynamicResource InputPasswordBox}"/>
-                <Button  Grid.Row="4" Grid.Column="1" Height="45" Style="{DynamicResource InputButton}" Command="{Binding SignInCommand}" Content="{DynamicResource m_SignIn}" />
-                <Button  Grid.Row="5"  Grid.Column="1" VerticalAlignment="Top" Content="{DynamicResource m_SignUp}" Style="{DynamicResource SignUpButton}" Command="{Binding ShowSignUpCommand}" Background="#FF4169C7" />
-                <ce:SignUpPage x:Name="pageSignUp" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5" Background="#FF191E30" 
-                               Visibility="{Binding SignUpVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+                <ContentControl Content="{Binding SelectedViewModel, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="5"/>
                 <Button Style="{DynamicResource BackwardButton}" Height="25" Width="30" Grid.Row="0" Grid.Column="0" 
-                        Visibility="{Binding BackwardVisibility, UpdateSourceTrigger=PropertyChanged}"
-                        Command="{Binding HideSignUpCommand}"
+                        Visibility="{Binding ToSignInVisibility, UpdateSourceTrigger=PropertyChanged}"
+                        Command="{Binding SignInCommand}" CommandParameter="SignIn"
                         HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Button Grid.Row="5" Visibility="{Binding ToSignUpVisibility, UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Column="1" VerticalAlignment="Top" Content="{DynamicResource m_SignUp}" Style="{DynamicResource LiteralButton}" 
+                        Command="{Binding SignUpCommand}" CommandParameter="SignUp" Background="#FF4169C7" Margin="0,10,0,0" />
             </Grid>
         </Border>
     </Border>

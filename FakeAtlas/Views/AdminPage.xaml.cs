@@ -1,5 +1,4 @@
-﻿using FakeAtlas.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FakeAtlas.CustomUIElements
+namespace FakeAtlas.Views
 {
     /// <summary>
-    /// Логика взаимодействия для SIgnUpPage.xaml
+    /// Логика взаимодействия для AdminPage.xaml
     /// </summary>
-    public partial class SignUpPage : UserControl
+    public partial class AdminPage : UserControl
     {
-        public SignUpPage()
+        public AdminPage()
         {
             InitializeComponent();
         }

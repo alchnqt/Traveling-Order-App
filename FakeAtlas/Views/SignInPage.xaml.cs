@@ -1,8 +1,9 @@
 ﻿using FakeAtlas.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Security;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,20 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FakeAtlas.Views
 {
     /// <summary>
-    /// Логика взаимодействия для LoginWindow.xaml
+    /// Логика взаимодействия для SignInPage.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class SignInPage : UserControl
     {
-        public LoginWindow()
+        public SignInPage()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            DataContext = new SignInViewModel();
+            
         }
-
     }
 }

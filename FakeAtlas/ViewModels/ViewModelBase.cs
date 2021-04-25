@@ -9,9 +9,8 @@ using System.Text;
 
 namespace FakeAtlas.ViewModels
 {
-    public class BaseViewModel<T> : INotifyPropertyChanged, IViewModel, ICloseWindow, IMinimizeWindow, IMaximizeWindow
+    public class ViewModelBase : INotifyPropertyChanged, IViewModel, ICloseWindow, IMinimizeWindow, IMaximizeWindow
     {
-        protected T _objectViewModel;
         /// <summary>
         /// A base view model that fires Property Changed events as needed
         /// </summary>      

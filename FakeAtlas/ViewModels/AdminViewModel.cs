@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FakeAtlas.Models
+namespace FakeAtlas.ViewModels
 {
-    public class Login : ModelBase
+    public class AdminViewModel : ViewModelBase
     {
-        
+        public AdminViewModel()
+        {
+
+        }
     }
 }

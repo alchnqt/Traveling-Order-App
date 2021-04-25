@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FakeAtlas.Models
 {
-    public abstract class ObjectModel : INotifyPropertyChanged
+    public abstract class ModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

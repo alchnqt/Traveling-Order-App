@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace FakeAtlas.Models
 {
-    public class Login : ModelBase
+    public class SignUpModel : ModelBase
     {
-        
+        public string UserLogin { get; set; }
+        public SecureString UserPassword { get; set; }
     }
 }

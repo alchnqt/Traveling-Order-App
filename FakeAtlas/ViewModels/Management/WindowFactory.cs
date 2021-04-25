@@ -9,12 +9,12 @@ using System.Windows.Input;
 
 namespace FakeAtlas.ViewModels.Management
 {
-    public class ViewManager
+    public class WindowFactory
     {
         private readonly IWindowFactory m_windowFactory;
         private ICommand m_openNewWindow;
 
-        public ViewManager(IWindowFactory windowFactory)
+        public WindowFactory(IWindowFactory windowFactory)
         {
             m_windowFactory = windowFactory;
             m_openNewWindow = null;
