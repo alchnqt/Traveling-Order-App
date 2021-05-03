@@ -188,4 +188,51 @@ namespace FakeAtlas.ViewModels.Management
     }
 
     #endregion
+
+
+    #region delegate restore
+    interface IRestoreWindow
+    {
+        Action Restore { get; set; }
+        bool CanRestore();
+    }
+
+    public class WindowRestorer
+    {
+        public static bool EnableWindowRestoring(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(EnableWindowRestoringProperty);
+        }
+
+        public static void SetEnableWindowRestoringProperty(DependencyObject obj, bool value)
+        {
+            obj.SetValue(EnableWindowRestoringProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnableWindowRestoringProperty =
+            DependencyProperty.RegisterAttached("EnableWindowRestoring", typeof(bool), typeof(WindowRestorer), new PropertyMetadata(false, OnEnableWindowsRestoringChanged));
+
+        private static void OnEnableWindowsRestoringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Window window)
+            {
+                window.Loaded += (s, e) =>
+                {
+                    if (window.DataContext is IRestoreWindow vm)
+                    {
+                        vm.Restore += () =>
+                        {
+                            window.WindowState = WindowState.Normal;
+                        };
+                        window.Closing += (s, e) =>
+                        {
+                            e.Cancel = !vm.CanRestore();
+                        };
+                    }
+                };
+            }
+        }
+    }
+    #endregion
 }

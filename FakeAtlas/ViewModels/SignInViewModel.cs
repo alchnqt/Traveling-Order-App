@@ -14,7 +14,7 @@ namespace FakeAtlas.ViewModels
 {
     public class SignInViewModel : ViewModelBase
     {
-        private UnitOfWork unitOfWork;
+        private readonly UnitOfWork unitOfWork;
 
         private SignInModel _selectedAccount;
 
@@ -51,27 +51,23 @@ namespace FakeAtlas.ViewModels
 
         private void SignInClick()
         {
-            
-            ProductionWindowFactory factory = new ProductionWindowFactory();
-            factory.CreateNewWindow();
-            CloseWindow();
             StringBuilder Sb = new();
             using (var hash = SHA256.Create())
             {
                 Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(UnsecurePassword));
-                foreach (Byte b in result)
+                byte[] result = hash.ComputeHash(enc.GetBytes(UnsecurePassword));
+                foreach (byte b in result)
                     Sb.Append(b.ToString("x2"));
             }
             try
             {
-                //var accessUser = (from user in unitOfWork.BookingUsers.Get()
-                //                  where user.UserLogin == SelectedAccount.UserLogin
-                //                  && user.UserPassword == Sb.ToString()
-                //                  select user).Single();
-                //MessageBox.Show(Sb.ToString());
-                LoginView.Close();
-                //MessageBox.Show("Connected!");
+                MainWindowViewModel.User = (from user in unitOfWork.BookingUsers.Get()
+                                  where user.UserLogin == SelectedAccount.UserLogin
+                                  && user.UserPassword == Sb.ToString()
+                                  select user).Single();
+                ProductionWindowFactory factory = new();
+                factory.CreateNewWindow();
+                CloseWindow();
             }
             catch (Exception e)
             {

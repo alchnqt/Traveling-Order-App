@@ -19,6 +19,7 @@ namespace FakeAtlas
 
         public virtual DbSet<BookingUser> BookingUsers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderUser> OrderUsers { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<UniqueAddress> UniqueAddresses { get; set; }
 
@@ -92,6 +93,27 @@ namespace FakeAtlas
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ShipperId)
                     .HasConstraintName("fk_shipper_id");
+            });
+
+            modelBuilder.Entity<OrderUser>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("order_user");
+
+                entity.Property(e => e.IdOrder).HasColumnName("id_order");
+
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+                entity.HasOne(d => d.IdOrderNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.IdOrder)
+                    .HasConstraintName("pk_id_order");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.IdUser)
+                    .HasConstraintName("pk_id_user");
             });
 
             modelBuilder.Entity<Shipper>(entity =>

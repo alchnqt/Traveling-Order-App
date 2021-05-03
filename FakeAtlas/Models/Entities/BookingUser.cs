@@ -7,17 +7,11 @@ namespace FakeAtlas
 {
     public partial class BookingUser
     {
-        public BookingUser(string login, string password, int id = 0)
-        {
-            Orders = new HashSet<Order>();
-            UserLogin = login;
-            UserPassword = password;
-            IsAdmin = false;
-        }
         public BookingUser()
         {
             Orders = new HashSet<Order>();
         }
+
         public int Id { get; set; }
         public string FullName { get; set; }
         public int? IdAddress { get; set; }

@@ -36,11 +36,10 @@
                     <ColumnDefinition Width="18*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" FontFamily="Segoe Script" HorizontalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="1" Width="168"/>
-                <StackPanel DockPanel.Dock="Top" Width="50" Height="20" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Right"
+                <StackPanel DockPanel.Dock="Top" Width="81" Height="38" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Right"
                             VerticalAlignment="Top" Grid.Column="1" Grid.Row="0">
-                    <Button Style="{DynamicResource MinimizeButton}" Command="{Binding MinimizeCommand}" VerticalAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Height="16" Width="15"/>
-                    <Label Width="12"/>
-                    <Button Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}" VerticalAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Height="18" Width="17"/>
+                    <Button Style="{DynamicResource MinimizeButton}" Command="{Binding MinimizeCommand}" VerticalAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Height="38" Width="40"/>
+                    <Button Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}" VerticalAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Height="38" Width="41"/>
                 </StackPanel>
                 <ContentControl Content="{Binding SelectedViewModel, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="5"/>
                 <Button Style="{DynamicResource BackwardButton}" Height="25" Width="30" Grid.Row="0" Grid.Column="0" 

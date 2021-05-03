@@ -14,6 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\info.png" />
+    <None Remove="Resources\roadWInterFULLHD.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
@@ -41,6 +46,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Utilities" Version="16.9.31024.71" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\info.png" />
+    <Resource Include="Resources\roadWInterFULLHD.jpg" />
   </ItemGroup>
 
 </Project>

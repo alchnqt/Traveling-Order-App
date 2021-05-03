@@ -6,16 +6,40 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows;
 
 namespace FakeAtlas.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged, IViewModel, ICloseWindow, IMinimizeWindow, IMaximizeWindow
+    public class ViewModelBase : INotifyPropertyChanged, IViewModel, ICloseWindow, IMinimizeWindow, IMaximizeWindow, IRestoreWindow
     {
         /// <summary>
         /// A base view model that fires Property Changed events as needed
         /// </summary>      
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
         public void OnPropertyChanged([CallerMemberName] string prop = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+
+
+        private Visibility restoreVisibility = Visibility.Collapsed;
+        private Visibility maximizeVisibility = Visibility.Visible;
+
+        public Visibility RestoreVisibility
+        {
+            get { return restoreVisibility; }
+            set
+            {
+                restoreVisibility = value;
+                OnPropertyChanged(nameof(RestoreVisibility));
+            }
+        }
+        public Visibility MaximizeVisibility
+        {
+            get { return maximizeVisibility; }
+            set
+            {
+                maximizeVisibility = value;
+                OnPropertyChanged(nameof(MaximizeVisibility));
+            }
+        }
 
         #region Basic Commands
 
@@ -54,12 +78,32 @@ namespace FakeAtlas.ViewModels
         private void MaximizeWindow()
         {
             Maximize?.Invoke();
+            RestoreVisibility = Visibility.Visible;
+            MaximizeVisibility = Visibility.Collapsed;
         }
         public bool CanMaximize()
         {
             return true;
         }
         public Action Minimize { get; set; }
+
+        public Action Restore { get; set; }
+
+        private DelegateCommand _restoreCommand;
+
+        public DelegateCommand RestoreCommand => _restoreCommand ?? (_restoreCommand = new DelegateCommand(RestoreWindow));
+
+        private void RestoreWindow()
+        {
+            Restore?.Invoke();
+
+            RestoreVisibility = Visibility.Collapsed;
+            MaximizeVisibility = Visibility.Visible;
+        }
+        public bool CanRestore()
+        {
+            return true;
+        }
 
         #endregion
     }
