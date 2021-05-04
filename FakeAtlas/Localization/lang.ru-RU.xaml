@@ -25,7 +25,11 @@
     <v:String x:Key="m_Save">Сохранить</v:String>
     <v:String x:Key="m_From">Откуда</v:String>
     <v:String x:Key="m_To">Куда</v:String>
-    <v:String x:Key="m_DepartureTime">Время отправления</v:String>
+    <v:String x:Key="m_DepartureTime">, время отправления: </v:String>
+    <v:String x:Key="m_DepartureTimeInfo">Время отправления</v:String>
     <v:String x:Key="m_When">Когда</v:String>
-    <v:String x:Key="m_Cost">Стоимость</v:String>
+    <v:String x:Key="m_Cost">, стоимость</v:String>
+    <v:String x:Key="m_CostInfo">Стоимость</v:String>
+    <v:String x:Key="m_OrderTime">, время бронирования: </v:String>
+    <v:String x:Key="m_OrderTimeInfo">Время бронирования</v:String>
 </ResourceDictionary>

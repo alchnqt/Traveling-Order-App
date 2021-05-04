@@ -51,5 +51,13 @@ namespace FakeAtlas.ViewModels
         public ICommand FindCommand => findCommand ??= new DelegateCommand(Find);
 
         private void Find() => SelectedViewModel = new SearchViewModel();
+
+        private ICommand logOutCommand;
+        public ICommand LogOutCommand => logOutCommand ??= new DelegateCommand(LogOut);
+
+        private void LogOut()
+        {
+            User = null;
+        }
     }
 }

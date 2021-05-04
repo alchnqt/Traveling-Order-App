@@ -121,12 +121,12 @@
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="LayoutRoot" Background="Transparent" Width="44" Height="30">
                         <TextBlock x:Name="txt" Text="{TemplateBinding Content}" FontFamily="Segoe MDL2 Assets" FontSize="10" 
-                                   Foreground="#999999" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Foreground="#FF1D1F2E" HorizontalAlignment="Center" VerticalAlignment="Center"
                                    RenderOptions.ClearTypeHint="Auto" TextOptions.TextRenderingMode="Aliased"  TextOptions.TextFormattingMode="Display"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="#E5E5E5"/>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="#FF5C6D93"/>
                             <Setter TargetName="txt" Property="Foreground" Value="#000000"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -311,7 +311,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
-                    <Border Background="#FF2D293C" />
+                    <Border Background="Transparent" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -331,9 +331,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
                     <Border CornerRadius="2"
-                Background="{TemplateBinding Background}"
-                BorderBrush="{TemplateBinding BorderBrush}"
-                BorderThickness="1" />
+                Background="#667191"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -367,17 +365,7 @@
                Margin="1,0,1,0">
                         <Thumb.BorderBrush>
 
-                            <LinearGradientBrush StartPoint="0,0"
-                                 EndPoint="1,0">
-                                <LinearGradientBrush.GradientStops>
-                                    <GradientStopCollection>
-                                        <GradientStop Color="#FF636368"
-                                Offset="0.0" />
-                                        <GradientStop Color="{DynamicResource BorderDarkColor}"
-                                Offset="1.0" />
-                                    </GradientStopCollection>
-                                </LinearGradientBrush.GradientStops>
-                            </LinearGradientBrush>
+                            <SolidColorBrush Color="{DynamicResource ControlLightColor}" Opacity="0.55"/>
 
                         </Thumb.BorderBrush>
                         <Thumb.Background>
@@ -410,7 +398,7 @@
             </Grid.ColumnDefinitions>
             <Border Grid.ColumnSpan="3"
             CornerRadius="2"
-            Background="#F0F0F0" />
+            Background="#adb4c9" />
             <RepeatButton Grid.Column="0"
                   Style="{StaticResource ScrollBarLineButton}"
                   Width="18"

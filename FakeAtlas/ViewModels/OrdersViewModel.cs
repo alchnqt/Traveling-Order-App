@@ -23,5 +23,14 @@ namespace FakeAtlas.ViewModels
 
             }
         }
+
+        public OrdersViewModel()
+        {
+            Orders = new List<Order> {
+                new Order { PathFrom = "Марьина Горка", PathTo = "Минск", OrderTime = DateTime.Now},
+                new Order { PathFrom = "Минск", PathTo = "Марьина Горка", OrderTime = DateTime.Now },
+                new Order { PathFrom = "Минск", PathTo = "Гродно", OrderTime = DateTime.Now }
+                };
+        }
     }
 }

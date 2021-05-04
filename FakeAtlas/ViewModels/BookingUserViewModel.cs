@@ -22,7 +22,7 @@ namespace FakeAtlas.ViewModels
         public List<string> orders { get; set; } = new List<string>();
         public BookingUserViewModel()
         {
-            orders.Add(new Order {PathName = "hui" }.PathName);
+        
         }
     }
 }

@@ -189,7 +189,6 @@ namespace FakeAtlas.ViewModels.Management
 
     #endregion
 
-
     #region delegate restore
     interface IRestoreWindow
     {

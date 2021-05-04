@@ -78,9 +78,9 @@ namespace FakeAtlas
                     .HasColumnType("datetime")
                     .HasColumnName("order_time");
 
-                entity.Property(e => e.PathName)
-                    .HasMaxLength(50)
-                    .HasColumnName("path_name");
+                //entity.Property(e => e.PathName)
+                //    .HasMaxLength(50)
+                //    .HasColumnName("path_name");
 
                 entity.Property(e => e.ShipperId).HasColumnName("shipper_id");
 

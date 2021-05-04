@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:FakeAtlas.Views"
              xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels"
              mc:Ignorable="d"
+             xmlns:models="clr-namespace:FakeAtlas.Models"
              d:DataContext="{d:DesignInstance Type=viewmodels:OrdersViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -19,17 +20,16 @@
     ItemsSource="{Binding Path=Orders}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="{DynamicResource m_DepartureTime}" 
-                  DisplayMemberBinding="{Binding ID}"  >
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" 
+                        <GridViewColumn DisplayMemberBinding="{Binding PathFrom}" 
                   Header="{DynamicResource m_From}" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Price}" 
+                        <GridViewColumn DisplayMemberBinding="{Binding PathTo}" 
                   Header="{DynamicResource m_To}" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Author}" 
+                        <GridViewColumn DisplayMemberBinding="{Binding DepartureTime}" 
                   Header="{DynamicResource m_When}" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Catalog}" 
-                  Header="{DynamicResource m_Cost}" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Cost}" 
+                  Header="{DynamicResource m_CostInfo}" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding OrderTime}" 
+                  Header="{DynamicResource m_OrderTimeInfo}" Width="150"/>
                     </GridView>
                 </ListView.View>
             </ListView>
