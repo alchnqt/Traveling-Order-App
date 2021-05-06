@@ -45,35 +45,27 @@ namespace FakeAtlas.ViewModels
 
         private DelegateCommand _closeCommand;
 
-        public DelegateCommand CloseCommand => _closeCommand ?? (_closeCommand = new DelegateCommand(CloseWindow));
+        public DelegateCommand CloseCommand => _closeCommand ??= new DelegateCommand(CloseWindow);
 
-        protected void CloseWindow()
-        {
-            Close?.Invoke();
-        }
-        public bool CanClose()
-        {
-            return true;
-        }
+        protected void CloseWindow() => Close?.Invoke();
+
+        public bool CanClose() => true;
+
         public Action Close { get; set; }
 
         private DelegateCommand _minimizeCommand;
 
-        public DelegateCommand MinimizeCommand => _minimizeCommand ?? (_minimizeCommand = new DelegateCommand(MinimizeWindow));
+        public DelegateCommand MinimizeCommand => _minimizeCommand ??= new DelegateCommand(MinimizeWindow);
 
-        private void MinimizeWindow()
-        {
-            Minimize?.Invoke();
-        }
-        public bool CanMinimize()
-        {
-            return true;
-        }
+        private void MinimizeWindow() => Minimize?.Invoke();
+
+        public bool CanMinimize() => true;
+
         public Action Maximize { get; set; }
 
         private DelegateCommand _maximizeCommand;
 
-        public DelegateCommand MaximizeCommand => _maximizeCommand ?? (_maximizeCommand = new DelegateCommand(MaximizeWindow));
+        public DelegateCommand MaximizeCommand => _maximizeCommand ??= new DelegateCommand(MaximizeWindow);
 
         private void MaximizeWindow()
         {
@@ -81,17 +73,15 @@ namespace FakeAtlas.ViewModels
             RestoreVisibility = Visibility.Visible;
             MaximizeVisibility = Visibility.Collapsed;
         }
-        public bool CanMaximize()
-        {
-            return true;
-        }
+        public bool CanMaximize() => true;
+
         public Action Minimize { get; set; }
 
         public Action Restore { get; set; }
 
         private DelegateCommand _restoreCommand;
 
-        public DelegateCommand RestoreCommand => _restoreCommand ?? (_restoreCommand = new DelegateCommand(RestoreWindow));
+        public DelegateCommand RestoreCommand => _restoreCommand ??= new DelegateCommand(RestoreWindow);
 
         private void RestoreWindow()
         {
@@ -100,10 +90,8 @@ namespace FakeAtlas.ViewModels
             RestoreVisibility = Visibility.Collapsed;
             MaximizeVisibility = Visibility.Visible;
         }
-        public bool CanRestore()
-        {
-            return true;
-        }
+
+        public bool CanRestore() => true;
 
         #endregion
     }

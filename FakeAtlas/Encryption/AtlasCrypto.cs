@@ -15,6 +15,16 @@ namespace FakeAtlas.Encryption
             return GetSalt(saltLengthLimit);
         }
 
+        public static string byteArrayToString(byte[] inputArray)
+        {
+            StringBuilder output = new StringBuilder("");
+            for (int i = 0; i < inputArray.Length; i++)
+            {
+                output.Append(inputArray[i].ToString("X2"));
+            }
+            return output.ToString();
+        }
+
         private static byte[] GetSalt(int maximumSaltLength)
         {
             var salt = new byte[maximumSaltLength];

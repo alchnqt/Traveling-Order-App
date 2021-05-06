@@ -28,15 +28,18 @@
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="TiledButton">
-        <Setter Property="Background" Value="#FFC5CBF9" />
+        <Setter Property="Background" Value="#FF7EA2DD" />
         <Setter Property="TextBlock.TextAlignment" Value="Center" />
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontFamily" Value="Bahnschrift Light"/>
-        <Setter Property="Foreground" Value="#FF2E2942"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="InputBtnBorder" CornerRadius="4" Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Background}" BorderBrush="Transparent" BorderThickness="0" >
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" Opacity="0.6" BlurRadius="15" ShadowDepth="0"/>
+                        </Border.Effect>
                         <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                 </ControlTemplate>
@@ -44,7 +47,8 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF7EA2DD" />
+                <Setter Property="Background" Value="#FF2E2942" />
+                <Setter Property="Foreground" Value="#FF7EA2DD"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Opacity" Value="0.75" />
@@ -67,7 +71,7 @@
                                                 <GeometryDrawing Brush="Transparent" Geometry="F1M16,16L0,16 0,0 16,0z" />
                                                 <GeometryDrawing Brush="Transparent" Geometry="F1M15,8C15,11.866 11.866,15 8,15 4.134,15 1,11.866 1,8 1,4.134 4.134,1 8,1 11.866,1 15,4.134 15,8" />
                                                 <GeometryDrawing Brush="Transparent" Geometry="F1M4,8L7,5 9,5 7,7 12,7 12,9 7,9 9,11 7,11z M2,8C2,11.247 4.755,14 8,14 11.245,14 14,11.247 14,8 14,4.756 11.245,2 8,2 4.755,2 2,4.756 2,8" />
-                                                <GeometryDrawing Brush="GhostWhite" Geometry="F1M4,8L7,5 9,5 7,7 12,7 12,9 7,9 9,11 7,11z" />
+                                                <GeometryDrawing Brush="#FF120C31" Geometry="F1M4,8L7,5 9,5 7,7 12,7 12,9 7,9 9,11 7,11z" />
                                             </DrawingGroup.Children>
                                         </DrawingGroup>
                                     </DrawingBrush.Drawing>
@@ -90,7 +94,7 @@
 
     <Style TargetType="{x:Type Button}" x:Key="LiteralButton">
         <Setter Property="FontFamily" Value="NanumGothic"/>
-        <Setter Property="Foreground" Value="#FF333346"/>
+        <Setter Property="Foreground" Value="#FF020418"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -107,7 +111,7 @@
                 <Setter Property="Foreground" Value="#FF665F5F" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Opacity" Value="0.75" />
+                <Setter Property="Opacity" Value="0.85" />
                 <Setter Property="Margin" Value="1 0 0 0" />
             </Trigger>
             

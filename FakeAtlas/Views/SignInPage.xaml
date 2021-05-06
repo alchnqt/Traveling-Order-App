@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakeAtlas.Views"
              xmlns:b ="clr-namespace:FakeAtlas.Behavior"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:SignInViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="370" d:DesignWidth="374">
     <Grid>
@@ -22,13 +23,14 @@
             <ColumnDefinition Width="149*"/>
             <ColumnDefinition Width="18*"/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource InputTextBox}" Text="{Binding SelectedAccount.UserLogin, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource InputTextBox}" 
+                 Text="{Binding SelectedAccount.UserLogin, UpdateSourceTrigger=PropertyChanged}"/>
         <PasswordBox Grid.Row="3" Grid.Column="1"  Height="30" VerticalAlignment="Top" Style="{DynamicResource InputPasswordBox}">
             <i:Interaction.Behaviors>
                 <b:DependecyPropertyBehavior 
                 UpdateEvent="PasswordChanged"
                 Property="Password"
-                Binding="{Binding UnsecurePassword}"
+                Binding="{Binding UnsecurePassword, UpdateSourceTrigger=PropertyChanged}"
                 />
             </i:Interaction.Behaviors>
         </PasswordBox>

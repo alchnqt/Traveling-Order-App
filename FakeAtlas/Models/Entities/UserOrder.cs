@@ -5,16 +5,15 @@ using System.Collections.Generic;
 
 namespace FakeAtlas
 {
-    public partial class Order
+    public partial class UserOrder
     {
         public int Id { get; set; }
-        public string PathFrom { get; set; }
-        public string PathTo { get; set; }
-        public DateTime? DepartureTime { get; set; }
+        public int? AvailableOrdersId { get; set; }
         public int? ClientId { get; set; }
         public int? ShipperId { get; set; }
         public DateTime? OrderTime { get; set; }
 
+        public virtual AvailableOrder AvailableOrders { get; set; }
         public virtual BookingUser Client { get; set; }
         public virtual Shipper Shipper { get; set; }
     }

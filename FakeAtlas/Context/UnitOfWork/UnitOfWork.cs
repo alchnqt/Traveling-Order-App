@@ -10,6 +10,7 @@ namespace FakeAtlas.Context.UnitOfWork
     public class UnitOfWork : IDisposable
     {
         private BookingDBContext db = new BookingDBContext();
+
         private BookingDBRepository<BookingUser> userRepository;
 
         public BookingDBRepository<BookingUser> BookingUsers
@@ -21,6 +22,23 @@ namespace FakeAtlas.Context.UnitOfWork
                 return userRepository;
             }
         }
+
+        private BookingDBRepository<UniqueAddress> addressRepository;
+
+        public BookingDBRepository<UniqueAddress> UniqueAddress
+        {
+            get
+            {
+                if (addressRepository == null)
+                    addressRepository = new BookingDBRepository<UniqueAddress>(db);
+                return addressRepository;
+            }
+        }
+
+
+        private BookingDBRepository<UniqueAddress> ordersRepository;
+
+        public BookingDBRepository<UniqueAddress> OrdersRepository;
 
         public void Save()
         {

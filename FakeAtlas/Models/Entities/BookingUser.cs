@@ -9,7 +9,7 @@ namespace FakeAtlas
     {
         public BookingUser()
         {
-            Orders = new HashSet<Order>();
+            UserOrders = new HashSet<UserOrder>();
         }
 
         public int Id { get; set; }
@@ -18,8 +18,9 @@ namespace FakeAtlas
         public bool IsAdmin { get; set; }
         public string UserLogin { get; set; }
         public string UserPassword { get; set; }
+        public string Salt { get; set; }
 
         public virtual UniqueAddress IdAddressNavigation { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<UserOrder> UserOrders { get; set; }
     }
 }

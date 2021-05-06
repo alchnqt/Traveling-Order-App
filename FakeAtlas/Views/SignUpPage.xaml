@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" 
-             d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
+             xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:b="clr-namespace:FakeAtlas.Behavior"
+             d:DataContext="{d:DesignInstance Type=viewmodels:SignUpViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="370" d:DesignWidth="374">
     <Grid>
@@ -24,8 +24,16 @@
         <TextBox x:Name="tbLogin" Style="{DynamicResource InputTextBox}" Grid.Column="1" Grid.Row="1"  Height="30" 
                                 Text="{Binding SelectedAccount.UserLogin, UpdateSourceTrigger=PropertyChanged}"
                                 />
-        <PasswordBox Grid.Row="3" Grid.Column="1"  Height="30" Style="{DynamicResource InputPasswordBox}" x:Name="tbPassword"/>
-        <PasswordBox Grid.Row="4" Grid.Column="1"  Height="30" Style="{DynamicResource InputPasswordBox}" x:Name="tbPasswordRepeat"/>
+        <PasswordBox Grid.Row="3" Grid.Column="1"  Height="30" Style="{DynamicResource InputPasswordBox}">
+            <i:Interaction.Behaviors>
+                <b:DependecyPropertyBehavior 
+                UpdateEvent="PasswordChanged"
+                Property="Password"
+                Binding="{Binding UnsecurePassword, UpdateSourceTrigger=PropertyChanged}"
+                />
+            </i:Interaction.Behaviors>
+        </PasswordBox>
+        <PasswordBox Grid.Row="4" Grid.Column="1"  Height="30" Style="{DynamicResource InputPasswordBox}"/>
         <Button Style="{DynamicResource InputButton}" Command="{Binding SignUpCommand}"  Grid.Row="5" Grid.Column="1"
                 Content="{DynamicResource m_SignUpPage}" Height="41"/>
     </Grid>

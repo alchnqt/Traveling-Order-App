@@ -13,13 +13,28 @@
         <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScroll}">
             
         </Style>
+        <Style x:Key="GridViewColumnHeaderStyle1" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                        <Border BorderThickness="0" Background="Transparent">
+                            <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5 5 0 0" Width="{TemplateBinding Width}" TextAlignment="Left" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
     </UserControl.Resources>
     <Grid>
         <ScrollViewer>
             <ListView Background="Transparent"
     ItemsSource="{Binding Path=Orders}">
                 <ListView.View>
-                    <GridView>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}">
                         <GridViewColumn DisplayMemberBinding="{Binding PathFrom}" 
                   Header="{DynamicResource m_From}" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PathTo}" 

@@ -8,10 +8,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=viewmodels:BookingUserViewModel}">
-    <Border BorderBrush="#FF4F5A66" BorderThickness="1 1 0 0">
+    <Border BorderThickness="1 1 0 0">
+        <Border.BorderBrush>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.45">
+                <GradientStop Color="#FF2C2B48"/>
+                <GradientStop Color="#FF8583B7" Offset="1"/>
+                
+            </LinearGradientBrush>
+        </Border.BorderBrush>
         <Grid>
+            
             <Grid.Background>
-                <ImageBrush ImageSource="/FakeAtlas;component/Resources/info.png" Stretch="UniformToFill" Opacity="0.03"/>
+                <ImageBrush ImageSource="/FakeAtlas;component/Resources/info.png" Stretch="UniformToFill" Opacity="0.05"/>
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="5"/>
@@ -43,17 +51,17 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="1" Foreground="#FF2E2D57" Opacity="0.75" Grid.Row="1" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_Name}" Background="#FF2E2D57"/>
-            <Button  Grid.Column="1" Foreground="#FF2E2D57" Opacity="0.75" Grid.Row="3" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_City}"/>
-            <Button  Grid.Column="1" Foreground="#FF2E2D57" Opacity="0.75" Grid.Row="5" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_Oblast}"/>
-            <Button  Grid.Column="1" Foreground="#FF2E2D57" Opacity="0.75" Grid.Row="7" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_Street}"/>
-            <Button  Grid.Column="1" Foreground="#FF2E2D57" Opacity="0.75" Grid.Row="9" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_BuildingNum}" Background="#FF2A2649"/>
-            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="1" Text="{Binding SelectedUser.FullName}"/>
-            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="3" Text="{Binding SelectedUser.IdAddressNavigation.City}"  />
-            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="5" Text="{Binding SelectedUser.IdAddressNavigation.Oblast}"/>
-            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="7" Text="{Binding SelectedUser.IdAddressNavigation.StreetName}" />
-            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="9" Text="{Binding SelectedUser.IdAddressNavigation.BuildingNum}"/>
-            <Button  Style="{DynamicResource TiledButton}" Grid.Column="9" Grid.Row="13" Content="{DynamicResource m_Save}" FontSize="13"/>
+            <Button  Grid.Column="1" Foreground="#FF0B0A22" Grid.Row="1" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_Name}" Background="#FF070617"/>
+            <Button  Grid.Column="1" Foreground="#FF0B0A22" Grid.Row="3" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_City}"/>
+            <Button  Grid.Column="1" Foreground="#FF0B0A22" Grid.Row="5" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_Oblast}"/>
+            <Button  Grid.Column="1" Foreground="#FF0B0A22" Grid.Row="7" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_Street}"/>
+            <Button  Grid.Column="1" Foreground="#FF0B0A22" Grid.Row="9" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_BuildingNum}" Background="#FF2A2649"/>
+            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="1" Text="{Binding SelectedUser.FullName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="3" Text="{Binding SelectedAddress.City, UpdateSourceTrigger=PropertyChanged}"  />
+            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="5" Text="{Binding SelectedAddress.Oblast, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="7" Text="{Binding SelectedAddress.StreetName, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="9" Text="{Binding SelectedAddress.BuildingNum, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button  Style="{DynamicResource TiledButton}" Command="{Binding SaveCommand}" FontWeight="UltraBlack" Grid.Column="9" Grid.Row="13" Content="{DynamicResource m_Save}" FontSize="13"/>
         </Grid>
     </Border>
 </UserControl>

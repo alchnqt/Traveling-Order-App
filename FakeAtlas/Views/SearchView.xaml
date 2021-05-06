@@ -17,7 +17,7 @@
     <Border BorderBrush="#FF4F5A66" BorderThickness="1 1 0 0">
         <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/FakeAtlas;component/Resources/roadWinterFULLHD.jpg" Stretch="UniformToFill" Opacity="0.65"/>
+            <ImageBrush ImageSource="/FakeAtlas;component/Resources/roadWinterFULLHD.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             
@@ -42,7 +42,7 @@
                 <ColumnDefinition/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="1" Grid.Column="1" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_From}" Foreground="AliceBlue" HorizontalAlignment="Left"  FontSize="10" />
+        <Button Grid.Row="1" Grid.Column="1" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_From}" Foreground="AliceBlue"     HorizontalAlignment="Left"  FontSize="10" />
         <Button Grid.Row="1" Grid.Column="3" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_To}"   Foreground="AliceBlue"     HorizontalAlignment="Left"  FontSize="10"  />
         <Button Grid.Row="1" Grid.Column="5" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Date}" Foreground="AliceBlue"     HorizontalAlignment="Left"  FontSize="10"  />
         <TextBox Text="{Binding SelectedOrder.PathFrom, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Style="{DynamicResource InputTextBox}"/>

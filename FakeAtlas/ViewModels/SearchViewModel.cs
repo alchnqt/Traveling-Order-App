@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using FakeAtlas.Context.UnitOfWork;
 using Microsoft.VisualStudio.PlatformUI;
 
 namespace FakeAtlas.ViewModels
@@ -64,12 +65,17 @@ namespace FakeAtlas.ViewModels
         {
             try
             {
-                var availableOrders = from order in orders where order.DepartureTime.GetValueOrDefault().Year == SelectedOrder.DepartureTime.GetValueOrDefault().Year &&
-                                      order.DepartureTime.GetValueOrDefault().Month == SelectedOrder.DepartureTime.GetValueOrDefault().Month &&
-                                      order.DepartureTime.GetValueOrDefault().Day == SelectedOrder.DepartureTime.GetValueOrDefault().Day &&
-                                      order.PathFrom.Equals(SelectedOrder.PathFrom) && order.PathTo.Equals(SelectedOrder.PathTo) select order;
+                using (UnitOfWork unit = new())
+                {
+                 //   var availableOrders = from order in unit.OrdersRepository.Get()
+                 //                         where order.DepartureTime.GetValueOrDefault().Year == SelectedOrder.DepartureTime.GetValueOrDefault().Year &&
+                 //order.DepartureTime.GetValueOrDefault().Month == SelectedOrder.DepartureTime.GetValueOrDefault().Month &&
+                 //order.DepartureTime.GetValueOrDefault().Day == SelectedOrder.DepartureTime.GetValueOrDefault().Day &&
+                 //order.PathFrom.Equals(SelectedOrder.PathFrom) && order.PathTo.Equals(SelectedOrder.PathTo)
+                 //                         select order;
 
-                SelectedOrders = new ObservableCollection<Order>(availableOrders);
+                //SelectedOrders = new ObservableCollection<Order>(availableOrders);
+                }
             }
             catch (Exception e)
             {

@@ -19,8 +19,8 @@
         <WindowChrome/>
 
     </WindowChrome.WindowChrome>
-    <Border BorderBrush="Black" BorderThickness="1">
-        <Border Background="#FF191E30" BorderBrush="#FF4F5A66" BorderThickness="1">
+    <Border BorderThickness="0">
+        <Border Background="#FFD6E8FF" BorderBrush="#FFD6E8FF" BorderThickness="1">
             <Grid x:Name="WindowGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -35,7 +35,7 @@
                     <ColumnDefinition Width="149*"/>
                     <ColumnDefinition Width="18*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" FontFamily="Segoe Script" HorizontalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="1" Width="168"/>
+                <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" FontFamily="Tahoma" HorizontalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="1" Width="168"/>
                 <StackPanel DockPanel.Dock="Top" Width="81" Height="38" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Right"
                             VerticalAlignment="Top" Grid.Column="1" Grid.Row="0">
                     <Button Style="{DynamicResource MinimizeButton}" Command="{Binding MinimizeCommand}" VerticalAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Height="38" Width="40"/>

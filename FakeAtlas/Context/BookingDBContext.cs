@@ -17,17 +17,17 @@ namespace FakeAtlas
         {
         }
 
+        public virtual DbSet<AvailableOrder> AvailableOrders { get; set; }
         public virtual DbSet<BookingUser> BookingUsers { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderUser> OrderUsers { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<UniqueAddress> UniqueAddresses { get; set; }
+        public virtual DbSet<UserOrder> UserOrders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=DESKTOP-477QQK7;Database=BookingDB;Trusted_Connection=True;");
             }
         }
@@ -35,6 +35,27 @@ namespace FakeAtlas
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Cyrillic_General_CI_AS");
+
+            modelBuilder.Entity<AvailableOrder>(entity =>
+            {
+                entity.ToTable("available_orders");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Cost).HasColumnName("cost");
+
+                entity.Property(e => e.DepartureTime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("departure_time");
+
+                entity.Property(e => e.PathFrom)
+                    .HasMaxLength(100)
+                    .HasColumnName("path_from");
+
+                entity.Property(e => e.PathTo)
+                    .HasMaxLength(100)
+                    .HasColumnName("path_to");
+            });
 
             modelBuilder.Entity<BookingUser>(entity =>
             {
@@ -50,6 +71,10 @@ namespace FakeAtlas
 
                 entity.Property(e => e.IsAdmin).HasColumnName("is_admin");
 
+                entity.Property(e => e.Salt)
+                    .HasMaxLength(256)
+                    .HasColumnName("salt");
+
                 entity.Property(e => e.UserLogin)
                     .HasMaxLength(256)
                     .HasColumnName("user_login");
@@ -62,37 +87,6 @@ namespace FakeAtlas
                     .WithMany(p => p.BookingUsers)
                     .HasForeignKey(d => d.IdAddress)
                     .HasConstraintName("fk_idx_address");
-            });
-
-            modelBuilder.Entity<Order>(entity =>
-            {
-                entity.ToTable("orders");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
-
-                entity.Property(e => e.ClientId).HasColumnName("client_id");
-
-                entity.Property(e => e.OrderTime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("order_time");
-
-                //entity.Property(e => e.PathName)
-                //    .HasMaxLength(50)
-                //    .HasColumnName("path_name");
-
-                entity.Property(e => e.ShipperId).HasColumnName("shipper_id");
-
-                entity.HasOne(d => d.Client)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.ClientId)
-                    .HasConstraintName("fk_client_id");
-
-                entity.HasOne(d => d.Shipper)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.ShipperId)
-                    .HasConstraintName("fk_shipper_id");
             });
 
             modelBuilder.Entity<OrderUser>(entity =>
@@ -120,24 +114,24 @@ namespace FakeAtlas
             {
                 entity.ToTable("shippers");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.FullName)
                     .HasMaxLength(100)
                     .HasColumnName("full_name");
 
                 entity.Property(e => e.VehicleNum).HasColumnName("vehicle_num");
+
+                entity.Property(e => e.VehicleType)
+                    .HasMaxLength(100)
+                    .HasColumnName("vehicle_type");
             });
 
             modelBuilder.Entity<UniqueAddress>(entity =>
             {
                 entity.ToTable("unique_address");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.BuildingNum).HasColumnName("building_num");
 
@@ -152,6 +146,38 @@ namespace FakeAtlas
                 entity.Property(e => e.StreetName)
                     .HasMaxLength(20)
                     .HasColumnName("street_name");
+            });
+
+            modelBuilder.Entity<UserOrder>(entity =>
+            {
+                entity.ToTable("user_orders");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.AvailableOrdersId).HasColumnName("available_orders_id");
+
+                entity.Property(e => e.ClientId).HasColumnName("client_id");
+
+                entity.Property(e => e.OrderTime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("order_time");
+
+                entity.Property(e => e.ShipperId).HasColumnName("shipper_id");
+
+                entity.HasOne(d => d.AvailableOrders)
+                    .WithMany(p => p.UserOrders)
+                    .HasForeignKey(d => d.AvailableOrdersId)
+                    .HasConstraintName("fk_available_orders_id");
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.UserOrders)
+                    .HasForeignKey(d => d.ClientId)
+                    .HasConstraintName("fk_client_id");
+
+                entity.HasOne(d => d.Shipper)
+                    .WithMany(p => p.UserOrders)
+                    .HasForeignKey(d => d.ShipperId)
+                    .HasConstraintName("fk_shipper_id");
             });
 
             OnModelCreatingPartial(modelBuilder);

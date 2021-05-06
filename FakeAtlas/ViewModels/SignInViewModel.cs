@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using FakeAtlas.Encryption;
 
 namespace FakeAtlas.ViewModels
 {
@@ -16,9 +17,9 @@ namespace FakeAtlas.ViewModels
     {
         private readonly UnitOfWork unitOfWork;
 
-        private SignInModel _selectedAccount;
+        private BookingUser _selectedAccount = new();
 
-        public SignInModel SelectedAccount
+        public BookingUser SelectedAccount
         {
             get { return _selectedAccount; }
             set 
@@ -51,23 +52,23 @@ namespace FakeAtlas.ViewModels
 
         private void SignInClick()
         {
-            StringBuilder Sb = new();
-            using (var hash = SHA256.Create())
-            {
-                Encoding enc = Encoding.UTF8;
-                byte[] result = hash.ComputeHash(enc.GetBytes(UnsecurePassword));
-                foreach (byte b in result)
-                    Sb.Append(b.ToString("x2"));
-            }
             try
             {
-                MainWindowViewModel.User = (from user in unitOfWork.BookingUsers.Get()
-                                  where user.UserLogin == SelectedAccount.UserLogin
-                                  && user.UserPassword == Sb.ToString()
-                                  select user).Single();
-                ProductionWindowFactory factory = new();
-                factory.CreateNewWindow();
-                CloseWindow();
+                //Encoding enc = Encoding.UTF8;
+                //var salt = (from user in unitOfWork.BookingUsers.Get() where user.UserLogin.Equals(SelectedAccount.UserLogin) select user).Single();
+                //byte[] result = AtlasCrypto.GenerateSaltedHash(enc.GetBytes(UnsecurePassword), Convert.FromBase64String(salt.Salt));
+                
+                
+                //MainWindowViewModel.User = (from user in unitOfWork.BookingUsers.Get()
+                //                            where user.UserLogin.Equals(SelectedAccount.UserLogin)
+                //                            && user.UserPassword.Equals(Convert.ToBase64String(result))
+                //                            select user).Single();
+                //var tset = unitOfWork.UniqueAddress.Get();
+                //MainWindowViewModel.Address = (from address in unitOfWork.UniqueAddress.Get() where address.Id == MainWindowViewModel.User.Id select address).Single();
+                //ProductionWindowFactory factory = new();
+                //factory.CreateNewWindow();
+                //LoginView.CloseLoginWindow();
+
             }
             catch (Exception e)
             {

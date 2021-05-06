@@ -12,7 +12,18 @@ namespace FakeAtlas.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public static BookingUser User { get; set; }
+        private static BookingUser _user = new();
+
+        public static BookingUser User { get => _user; set => _user = value; }
+
+        private static UniqueAddress _address = new();
+
+        public static UniqueAddress Address
+        {
+            get { return _address; }
+            set { _address = value; }
+        }
+
 
         private ViewModelBase _selectedViewModel = new BookingUserViewModel();
 

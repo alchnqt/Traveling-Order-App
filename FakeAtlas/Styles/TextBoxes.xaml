@@ -11,6 +11,7 @@
           Value="None" />
         <Setter Property="FocusVisualStyle"
           Value="{x:Null}" />
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="MinWidth"
           Value="120" />
         <Setter Property="MinHeight"

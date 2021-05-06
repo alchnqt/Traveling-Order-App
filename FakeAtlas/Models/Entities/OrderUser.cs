@@ -10,7 +10,7 @@ namespace FakeAtlas
         public int? IdUser { get; set; }
         public int? IdOrder { get; set; }
 
-        public virtual Order IdOrderNavigation { get; set; }
+        public virtual UserOrder IdOrderNavigation { get; set; }
         public virtual BookingUser IdUserNavigation { get; set; }
     }
 }

@@ -57,6 +57,8 @@ namespace FakeAtlas.ViewModels
             }
         }
 
+        public void CloseLoginWindow() => CloseWindow();
+
         #endregion
 
         public LoginViewModel()
