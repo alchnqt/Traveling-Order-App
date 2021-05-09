@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace FakeAtlas
+namespace FakeAtlas.Models.Entities
 {
     public partial class AvailableOrder
     {
@@ -17,7 +17,9 @@ namespace FakeAtlas
         public string PathTo { get; set; }
         public DateTime? DepartureTime { get; set; }
         public int? Cost { get; set; }
+        public int? ShipperId { get; set; }
 
+        public virtual Shipper Shipper { get; set; }
         public virtual ICollection<UserOrder> UserOrders { get; set; }
     }
 }

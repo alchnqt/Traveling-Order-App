@@ -9,7 +9,7 @@
         xmlns:vmm ="clr-namespace:FakeAtlas.ViewModels.Management" xmlns:ce1="clr-namespace:FakeAtlas.Views"
         d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="478" Width="374"
+        Title="LoginWindow" Height="478" Width="376"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"
@@ -23,6 +23,7 @@
         <Border Background="#FFD6E8FF" BorderBrush="#FFD6E8FF" BorderThickness="1">
             <Grid x:Name="WindowGrid">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="38"/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition Height="3"/>
@@ -31,24 +32,61 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="26*"/>
                     <ColumnDefinition Width="149*"/>
-                    <ColumnDefinition Width="18*"/>
+                    <ColumnDefinition Width="41"/>
+                    <ColumnDefinition Width="41"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" FontFamily="Tahoma" HorizontalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="1" Width="168"/>
-                <StackPanel DockPanel.Dock="Top" Width="81" Height="38" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Right"
-                            VerticalAlignment="Top" Grid.Column="1" Grid.Row="0">
-                    <Button Style="{DynamicResource MinimizeButton}" Command="{Binding MinimizeCommand}" VerticalAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Height="38" Width="40"/>
-                    <Button Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}" VerticalAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Height="38" Width="41"/>
-                </StackPanel>
-                <ContentControl Content="{Binding SelectedViewModel, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="5"/>
-                <Button Style="{DynamicResource BackwardButton}" Height="25" Width="30" Grid.Row="0" Grid.Column="0" 
+                <TextBlock Text="Fake Atlas" Foreground="#FF6397C5" FontFamily="Tahoma" HorizontalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Button Grid.Column="2" Grid.Row="0" Style="{DynamicResource MinimizeButton}" Command="{Binding MinimizeCommand}" WindowChrome.IsHitTestVisibleInChrome="True" Width="41" />
+                <Button Grid.Column="3" Grid.Row="0" Style="{DynamicResource CloseButton}" Command="{Binding CloseCommand}" WindowChrome.IsHitTestVisibleInChrome="True"/>
+
+                <ContentControl x:Name="Pages" Content="{Binding SelectedViewModel, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="5"/>
+                <Button Style="{DynamicResource BackwardButton}" Height="25" Width="30" Grid.Row="1" Grid.Column="0" 
                         Visibility="{Binding ToSignInVisibility, UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding SignInCommand}" CommandParameter="SignIn"
-                        HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <Button Grid.Row="5" Visibility="{Binding ToSignUpVisibility, UpdateSourceTrigger=PropertyChanged}"
-                        Grid.Column="1" VerticalAlignment="Top" Content="{DynamicResource m_SignUp}" Style="{DynamicResource LiteralButton}" 
-                        Command="{Binding SignUpCommand}" CommandParameter="SignUp" Background="#FF4169C7" Margin="0,10,0,0" />
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation
+                                                 Storyboard.TargetName="Pages"
+                                                 Storyboard.TargetProperty="Margin"
+                                                 From="100 100 100 100" To="0 0 0 0" DecelerationRatio=".9" Duration="0:0:0.3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Grid.Row="6" Visibility="{Binding ToSignUpVisibility, UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Content="{DynamicResource m_SignUp}" Style="{DynamicResource LiteralButton}" 
+                        Command="{Binding SignUpCommand}" CommandParameter="SignUp" HorizontalAlignment="Center">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation
+                                                 Storyboard.TargetName="Pages"
+                                                 Storyboard.TargetProperty="Margin"
+                                                 From="-100 -100 -100 -100" To="0 0 0 0" DecelerationRatio=".9" Duration="0:0:0.3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <ToolBar Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                         WindowChrome.IsHitTestVisibleInChrome="True" Style="{DynamicResource EarthToolbar}">
+                    <Menu Opacity="0.8" BorderThickness="0" Background="Transparent">
+                        <MenuItem Width="32" Height="32" Background="Transparent">
+                            <MenuItem.Icon>
+                                <Image Source="../Resources/earth.png"/>
+                            </MenuItem.Icon>
+                            <MenuItem Header="en-GB" Command="{Binding Select_enGB_Command}"/>
+                            <MenuItem Header="ru-RU" Command="{Binding Select_ruRU_Command}"/>
+                        </MenuItem>
+                    </Menu>
+                </ToolBar>
             </Grid>
         </Border>
     </Border>

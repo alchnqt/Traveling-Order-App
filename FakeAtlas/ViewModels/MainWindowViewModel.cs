@@ -1,5 +1,4 @@
-﻿using FakeAtlas.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,23 +6,22 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.VisualStudio.PlatformUI;
+using FakeAtlas.ViewModels.Management;
+using FakeAtlas.Models.Entities;
 
 namespace FakeAtlas.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        #region Target current user
         private static BookingUser _user = new();
 
         public static BookingUser User { get => _user; set => _user = value; }
 
         private static UniqueAddress _address = new();
 
-        public static UniqueAddress Address
-        {
-            get { return _address; }
-            set { _address = value; }
-        }
-
+        public static UniqueAddress Address { get => _address; set => _address = value; }
+        #endregion
 
         private ViewModelBase _selectedViewModel = new BookingUserViewModel();
 
@@ -37,26 +35,21 @@ namespace FakeAtlas.ViewModels
             }
         }
 
-        public MainWindowViewModel()
+        private Visibility _adminVisibility = Visibility.Collapsed;
+
+        public Visibility AdminVisibility
         {
-            InfoCommand = new RelayCommand(o => InfoClick());
-            OrdersCommand = new RelayCommand(o => OrdersClick());
-            HelpCommand = new RelayCommand(o => HelpClick());
+            get { return _adminVisibility; }
+            set { _adminVisibility = value; }
         }
 
-        public static BookingUser Account { get; set; }
-
-        public ICommand InfoCommand { get; set; }
-
-        private void InfoClick() => SelectedViewModel = new BookingUserViewModel();
-
-        public ICommand OrdersCommand { get; set; }
-
-        private void OrdersClick() => SelectedViewModel = new OrdersViewModel();
-
-        public ICommand HelpCommand { get; set; }
-
-        private void HelpClick() => SelectedViewModel = new HelpViewModel();
+        public MainWindowViewModel()
+        {
+            if (User.IsAdmin)
+            {
+                AdminVisibility = Visibility.Visible;
+            }
+        }
 
         private ICommand findCommand;
         public ICommand FindCommand => findCommand ??= new DelegateCommand(Find);
@@ -69,6 +62,31 @@ namespace FakeAtlas.ViewModels
         private void LogOut()
         {
             User = null;
+            Address = null;
+            LoginWindowFactory window = new();
+            WindowFactory factory = new(window);
+            factory.OpenWindow();
+            CloseWindow();
         }
+
+        private ICommand infoCommand;
+        public ICommand InfoCommand => infoCommand ??= new DelegateCommand(Info);
+
+        private void Info() => SelectedViewModel = new BookingUserViewModel();
+
+        private ICommand ordersCommand;
+        public ICommand OrdersCommand => ordersCommand ??= new DelegateCommand(Orders);
+
+        private void Orders() => SelectedViewModel = new OrdersViewModel();
+
+        private ICommand helpCommand;
+        public ICommand HelpCommand => helpCommand ??= new DelegateCommand(Help);
+
+        private void Help() => SelectedViewModel = new HelpViewModel();
+
+        private ICommand shipperCommand;
+        public ICommand ShipperCommand => shipperCommand ??= new DelegateCommand(Shipper);
+
+        private void Shipper() => SelectedViewModel = new AdminViewModel();
     }
 }

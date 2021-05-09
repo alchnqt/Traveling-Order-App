@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using FakeAtlas.Context.UnitOfWork;
+using FakeAtlas.FakeAtlasUIComponents;
+using FakeAtlas.Models.Entities;
+using FakeAtlas.ViewModels.Management;
 using Microsoft.VisualStudio.PlatformUI;
 
 namespace FakeAtlas.ViewModels
 {
     public class SearchViewModel : ViewModelBase
     {
-        private List<Order> orders = new List<Order>();
+        private ObservableCollection<AvailableOrder> _selectedOrders = new();
 
-        private ObservableCollection<Order> _selectedOrders = new();
-
-        public ObservableCollection<Order> SelectedOrders
+        public ObservableCollection<AvailableOrder> SelectedOrders
         {
             get { return _selectedOrders; }
             set
@@ -27,9 +28,9 @@ namespace FakeAtlas.ViewModels
             }
         }
 
-        private Order _selectedOrder = new();
+        private AvailableOrder _selectedOrder = new() { DepartureTime = DateTime.Now};
 
-        public Order SelectedOrder
+        public AvailableOrder SelectedOrder
         {
             get { return _selectedOrder; }
             set 
@@ -40,14 +41,9 @@ namespace FakeAtlas.ViewModels
         }
 
 
-
         public SearchViewModel()
         {
-            SelectedOrders = new();
-            orders.Add(new Order { PathFrom = "Марьина Горка", PathTo = "Минск", OrderTime = DateTime.Now, DepartureTime = DateTime.Now});
-            orders.Add(new Order { PathFrom = "Минск", PathTo = "Марьина Горка", OrderTime = DateTime.Now, DepartureTime = DateTime.Now});
-            orders.Add(new Order { PathFrom = "Минск", PathTo = "Гродно", OrderTime = DateTime.Now, DepartureTime = DateTime.Now});
-
+            
         }
 
         private ICommand selectCommand;
@@ -55,7 +51,35 @@ namespace FakeAtlas.ViewModels
 
         private void Select()
         {
-            MessageBox.Show("ALL RIGHT");
+            var order = new UserOrder { AvailableOrdersId = SelectedOrder.Id, ClientId = MainWindowViewModel.User.Id, OrderTime = DateTime.Now};
+            FakeAtlasMessageBoxService box = new();
+            using (UnitOfWork unit = new())
+            {
+                var exsitedOrder = (from neworder in unit.UserOrderRepository.Get()
+                                    where neworder.ClientId == order.ClientId &&
+                                    neworder.AvailableOrdersId == order.AvailableOrdersId
+                                    select neworder).SingleOrDefault();
+                
+                if(!(exsitedOrder == null))
+                {
+                    if (exsitedOrder.AvailableOrdersId == order.AvailableOrdersId
+                                        && exsitedOrder.ClientId == order.ClientId)
+                    {
+                        box.ShowMessage(FakeAtlasMessageBox.MessageType.AlrdyExistingOrder, CurrentLocalization);
+                        return;
+                    }
+                }
+                if (box.Show())
+                {
+                    unit.UserOrderRepository.Create(order);
+                    unit.Save();
+                }
+                else
+                {
+                    return;
+                }
+            }
+            
         }
 
         private ICommand findCommand;
@@ -67,19 +91,20 @@ namespace FakeAtlas.ViewModels
             {
                 using (UnitOfWork unit = new())
                 {
-                 //   var availableOrders = from order in unit.OrdersRepository.Get()
-                 //                         where order.DepartureTime.GetValueOrDefault().Year == SelectedOrder.DepartureTime.GetValueOrDefault().Year &&
-                 //order.DepartureTime.GetValueOrDefault().Month == SelectedOrder.DepartureTime.GetValueOrDefault().Month &&
-                 //order.DepartureTime.GetValueOrDefault().Day == SelectedOrder.DepartureTime.GetValueOrDefault().Day &&
-                 //order.PathFrom.Equals(SelectedOrder.PathFrom) && order.PathTo.Equals(SelectedOrder.PathTo)
-                 //                         select order;
+                var availableOrders = from order in unit.AvailableOrdersRepository.Get()
+                                          where order.DepartureTime.GetValueOrDefault().Year == SelectedOrder.DepartureTime.GetValueOrDefault().Year &&
+                 order.DepartureTime.GetValueOrDefault().Month == SelectedOrder.DepartureTime.GetValueOrDefault().Month &&
+                 order.DepartureTime.GetValueOrDefault().Day == SelectedOrder.DepartureTime.GetValueOrDefault().Day &&
+                 order.PathFrom.Equals(SelectedOrder.PathFrom) && order.PathTo.Equals(SelectedOrder.PathTo)
+                                          select order;
 
-                //SelectedOrders = new ObservableCollection<Order>(availableOrders);
+                SelectedOrders = new ObservableCollection<AvailableOrder>(availableOrders);
                 }
             }
             catch (Exception e)
             {
-
+                FakeAtlasMessageBoxService box = new();
+                box.ShowMessage(e.Message);
             }
         }
     }

@@ -7,11 +7,18 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:SignUpViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="370" d:DesignWidth="374">
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="7"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -21,10 +28,10 @@
             <ColumnDefinition Width="149*"/>
             <ColumnDefinition Width="18*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="tbLogin" Style="{DynamicResource InputTextBox}" Grid.Column="1" Grid.Row="1"  Height="30" 
+        <TextBox x:Name="tbLogin" Style="{DynamicResource InputTextBox}" Grid.Column="1" Grid.Row="2"  Height="30" 
                                 Text="{Binding SelectedAccount.UserLogin, UpdateSourceTrigger=PropertyChanged}"
                                 />
-        <PasswordBox Grid.Row="3" Grid.Column="1"  Height="30" Style="{DynamicResource InputPasswordBox}">
+        <PasswordBox Grid.Row="4" Grid.Column="1"  Height="30" Style="{DynamicResource InputPasswordBox}">
             <i:Interaction.Behaviors>
                 <b:DependecyPropertyBehavior 
                 UpdateEvent="PasswordChanged"
@@ -33,8 +40,24 @@
                 />
             </i:Interaction.Behaviors>
         </PasswordBox>
-        <PasswordBox Grid.Row="4" Grid.Column="1"  Height="30" Style="{DynamicResource InputPasswordBox}"/>
-        <Button Style="{DynamicResource InputButton}" Command="{Binding SignUpCommand}"  Grid.Row="5" Grid.Column="1"
+        <PasswordBox Grid.Row="6" Grid.Column="1"  Height="30" Style="{DynamicResource InputPasswordBox}">
+            <i:Interaction.Behaviors>
+                <b:DependecyPropertyBehavior 
+                UpdateEvent="PasswordChanged"
+                Property="Password"
+                Binding="{Binding UnsecurePasswordRepeat, UpdateSourceTrigger=PropertyChanged}"
+                />
+            </i:Interaction.Behaviors>
+        </PasswordBox>
+        <Button Style="{DynamicResource InputButton}" Command="{Binding SignUpCommand}"  Grid.Row="8" Grid.Column="1"
                 Content="{DynamicResource m_SignUpPage}" Height="41"/>
+
+        <Button FontFamily="Javanese Text" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Login}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
+        <Button FontFamily="Javanese Text" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Password}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"/>
+        <Button FontFamily="Javanese Text" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_RepeatPassword}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="7" Grid.Column="1" Foreground="red"
+                   Text="{DynamicResource m_PasswordNotEquals}"
+                   HorizontalAlignment="Center" Visibility="{Binding ErrorVisibility, UpdateSourceTrigger=PropertyChanged}"/>
+
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using System;
+using FakeAtlas.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -19,7 +20,6 @@ namespace FakeAtlas
 
         public virtual DbSet<AvailableOrder> AvailableOrders { get; set; }
         public virtual DbSet<BookingUser> BookingUsers { get; set; }
-        public virtual DbSet<OrderUser> OrderUsers { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<UniqueAddress> UniqueAddresses { get; set; }
         public virtual DbSet<UserOrder> UserOrders { get; set; }
@@ -28,7 +28,7 @@ namespace FakeAtlas
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-477QQK7;Database=BookingDB;Trusted_Connection=True;");
+                optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server=DESKTOP-477QQK7;Database=BookingDB;Trusted_Connection=True;");
             }
         }
 
@@ -55,6 +55,13 @@ namespace FakeAtlas
                 entity.Property(e => e.PathTo)
                     .HasMaxLength(100)
                     .HasColumnName("path_to");
+
+                entity.Property(e => e.ShipperId).HasColumnName("shipper_id");
+
+                entity.HasOne(d => d.Shipper)
+                    .WithMany(p => p.AvailableOrders)
+                    .HasForeignKey(d => d.ShipperId)
+                    .HasConstraintName("fk_shipper_id");
             });
 
             modelBuilder.Entity<BookingUser>(entity =>
@@ -86,28 +93,8 @@ namespace FakeAtlas
                 entity.HasOne(d => d.IdAddressNavigation)
                     .WithMany(p => p.BookingUsers)
                     .HasForeignKey(d => d.IdAddress)
-                    .HasConstraintName("fk_idx_address");
-            });
-
-            modelBuilder.Entity<OrderUser>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("order_user");
-
-                entity.Property(e => e.IdOrder).HasColumnName("id_order");
-
-                entity.Property(e => e.IdUser).HasColumnName("id_user");
-
-                entity.HasOne(d => d.IdOrderNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.IdOrder)
-                    .HasConstraintName("pk_id_order");
-
-                entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.IdUser)
-                    .HasConstraintName("pk_id_user");
+                    .HasConstraintName("fk_idx_address")
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Shipper>(entity =>
@@ -162,8 +149,6 @@ namespace FakeAtlas
                     .HasColumnType("datetime")
                     .HasColumnName("order_time");
 
-                entity.Property(e => e.ShipperId).HasColumnName("shipper_id");
-
                 entity.HasOne(d => d.AvailableOrders)
                     .WithMany(p => p.UserOrders)
                     .HasForeignKey(d => d.AvailableOrdersId)
@@ -173,11 +158,6 @@ namespace FakeAtlas
                     .WithMany(p => p.UserOrders)
                     .HasForeignKey(d => d.ClientId)
                     .HasConstraintName("fk_client_id");
-
-                entity.HasOne(d => d.Shipper)
-                    .WithMany(p => p.UserOrders)
-                    .HasForeignKey(d => d.ShipperId)
-                    .HasConstraintName("fk_shipper_id");
             });
 
             OnModelCreatingPartial(modelBuilder);

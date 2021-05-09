@@ -1,6 +1,5 @@
 ﻿using FakeAtlas.Context.Repository;
 using FakeAtlas.Context.UnitOfWork;
-using FakeAtlas.Models;
 using FakeAtlas.ViewModels.Management;
 using FakeAtlas.Views;
 using Microsoft.VisualStudio.PlatformUI;

@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:FakeAtlas.Views" 
              xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:SearchViewModel}"
-             xmlns:model="clr-namespace:FakeAtlas.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -44,14 +43,14 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Row="1" Grid.Column="1" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_From}" Foreground="AliceBlue"     HorizontalAlignment="Left"  FontSize="10" />
         <Button Grid.Row="1" Grid.Column="3" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_To}"   Foreground="AliceBlue"     HorizontalAlignment="Left"  FontSize="10"  />
-        <Button Grid.Row="1" Grid.Column="5" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Date}" Foreground="AliceBlue"     HorizontalAlignment="Left"  FontSize="10"  />
+        <Button Grid.Row="1" Grid.Column="5" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_When}" Foreground="AliceBlue"     HorizontalAlignment="Left"  FontSize="10"  />
         <TextBox Text="{Binding SelectedOrder.PathFrom, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Style="{DynamicResource InputTextBox}"/>
             <TextBox Text="{Binding SelectedOrder.PathTo, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="3" Style="{DynamicResource InputTextBox}"/>
         <Button Command="{Binding FindCommand}" Grid.Row="5" Grid.Column="9" Style="{DynamicResource TiledButton}" Content="{DynamicResource m_Search}" FontSize="19"/>
             <DatePicker SelectedDate="{Binding SelectedOrder.DepartureTime, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="5" Style="{DynamicResource DP}" Opacity="0.85"/>
             <ScrollViewer Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.99">
                 <ListBox ItemsSource="{Binding SelectedOrders, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0"
-                         SelectedItem="{Binding SelectedItemProperty}">
+                         SelectedItem="{Binding SelectedOrder}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
                             <Setter Property="Background" Value="#FFBBD1FF"/>

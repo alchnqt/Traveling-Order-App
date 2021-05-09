@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using FakeAtlas.Encryption;
+using FakeAtlas.Models.Entities;
 
 namespace FakeAtlas.ViewModels
 {
@@ -54,25 +55,28 @@ namespace FakeAtlas.ViewModels
         {
             try
             {
-                //Encoding enc = Encoding.UTF8;
-                //var salt = (from user in unitOfWork.BookingUsers.Get() where user.UserLogin.Equals(SelectedAccount.UserLogin) select user).Single();
-                //byte[] result = AtlasCrypto.GenerateSaltedHash(enc.GetBytes(UnsecurePassword), Convert.FromBase64String(salt.Salt));
+                Encoding enc = Encoding.UTF8;
+                var salt = (from user in unitOfWork.BookingUsers.Get() where user.UserLogin.Equals(SelectedAccount.UserLogin) select user).Single();
+                byte[] result = AtlasCrypto.GenerateSaltedHash(enc.GetBytes(UnsecurePassword), Convert.FromBase64String(salt.Salt));
+
+
+                MainWindowViewModel.User = (from user in unitOfWork.BookingUsers.Get()
+                                            where user.UserLogin.Equals(SelectedAccount.UserLogin)
+                                            && user.UserPassword.Equals(Convert.ToBase64String(result))
+                                            select user).Single();
+
+                MainWindowViewModel.Address = (from address in unitOfWork.AddressRepository.Get() where address.Id == MainWindowViewModel.User.Id select address).Single();
                 
-                
-                //MainWindowViewModel.User = (from user in unitOfWork.BookingUsers.Get()
-                //                            where user.UserLogin.Equals(SelectedAccount.UserLogin)
-                //                            && user.UserPassword.Equals(Convert.ToBase64String(result))
-                //                            select user).Single();
-                //var tset = unitOfWork.UniqueAddress.Get();
-                //MainWindowViewModel.Address = (from address in unitOfWork.UniqueAddress.Get() where address.Id == MainWindowViewModel.User.Id select address).Single();
-                //ProductionWindowFactory factory = new();
-                //factory.CreateNewWindow();
-                //LoginView.CloseLoginWindow();
+                ProductionWindowFactory mainWindow = new();
+                WindowFactory factory = new(mainWindow);
+                factory.OpenWindow();
+                LoginView.CloseLoginWindow();
 
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                FakeAtlasMessageBoxService box = new();
+                box.ShowMessage(FakeAtlasUIComponents.FakeAtlasMessageBox.MessageType.WrongPasswordOrLogin, CurrentLocalization);
             }
         }
     }

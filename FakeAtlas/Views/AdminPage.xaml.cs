@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FakeAtlas.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace FakeAtlas.Views
         public AdminPage()
         {
             InitializeComponent();
+            DataContext = new AdminViewModel();
         }
     }
 }

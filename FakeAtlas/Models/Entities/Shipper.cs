@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace FakeAtlas
+namespace FakeAtlas.Models.Entities
 {
     public partial class Shipper
     {
         public Shipper()
         {
-            UserOrders = new HashSet<UserOrder>();
+            AvailableOrders = new HashSet<AvailableOrder>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace FakeAtlas
         public string VehicleType { get; set; }
         public int? VehicleNum { get; set; }
 
-        public virtual ICollection<UserOrder> UserOrders { get; set; }
+        public virtual ICollection<AvailableOrder> AvailableOrders { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FakeAtlas.Context.Repository;
+using FakeAtlas.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace FakeAtlas.Context.UnitOfWork
 {
     public class UnitOfWork : IDisposable
     {
-        private BookingDBContext db = new BookingDBContext();
+        private readonly BookingDBContext db = new();
 
         private BookingDBRepository<BookingUser> userRepository;
 
@@ -25,7 +26,7 @@ namespace FakeAtlas.Context.UnitOfWork
 
         private BookingDBRepository<UniqueAddress> addressRepository;
 
-        public BookingDBRepository<UniqueAddress> UniqueAddress
+        public BookingDBRepository<UniqueAddress> AddressRepository
         {
             get
             {
@@ -36,9 +37,54 @@ namespace FakeAtlas.Context.UnitOfWork
         }
 
 
-        private BookingDBRepository<UniqueAddress> ordersRepository;
+        private BookingDBRepository<Order> ordersRepository;
 
-        public BookingDBRepository<UniqueAddress> OrdersRepository;
+        public BookingDBRepository<Order> OrdersRepository
+        {
+            get
+            {
+                if (ordersRepository == null)
+                    ordersRepository = new BookingDBRepository<Order>(db);
+                return ordersRepository;
+            }
+        }
+
+        private BookingDBRepository<AvailableOrder> availableOrdersRepository;
+
+        public BookingDBRepository<AvailableOrder> AvailableOrdersRepository
+        {
+            get
+            {
+                if (availableOrdersRepository == null)
+                    availableOrdersRepository = new BookingDBRepository<AvailableOrder>(db);
+                return availableOrdersRepository;
+            }
+        }
+
+        private BookingDBRepository<Shipper> shipperRepository;
+
+        public BookingDBRepository<Shipper> ShipperRepository
+        {
+            get
+            {
+                if (shipperRepository == null)
+                    shipperRepository = new BookingDBRepository<Shipper>(db);
+                return shipperRepository;
+            }
+        }
+
+        private BookingDBRepository<UserOrder> userOrderRepository;
+
+        public BookingDBRepository<UserOrder> UserOrderRepository
+        {
+            get
+            {
+                if (userOrderRepository == null)
+                    userOrderRepository = new BookingDBRepository<UserOrder>(db);
+                return userOrderRepository;
+            }
+        }
+
 
         public void Save()
         {

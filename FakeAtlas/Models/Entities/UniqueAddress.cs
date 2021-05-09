@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace FakeAtlas
+namespace FakeAtlas.Models.Entities
 {
     public partial class UniqueAddress
     {

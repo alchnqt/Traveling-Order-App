@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:FakeAtlas.Views"
              xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels"
              mc:Ignorable="d"
-             xmlns:models="clr-namespace:FakeAtlas.Models"
              d:DataContext="{d:DesignInstance Type=viewmodels:OrdersViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -32,20 +31,31 @@
     <Grid>
         <ScrollViewer>
             <ListView Background="Transparent"
-    ItemsSource="{Binding Path=Orders}">
+    ItemsSource="{Binding Path=Orders, UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedItem="{Binding SelectedOrder}">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}">
-                        <GridViewColumn DisplayMemberBinding="{Binding PathFrom}" 
+                        <GridViewColumn DisplayMemberBinding="{Binding AvailableOrders.PathFrom}" 
                   Header="{DynamicResource m_From}" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding PathTo}" 
+                        <GridViewColumn DisplayMemberBinding="{Binding AvailableOrders.PathTo}" 
                   Header="{DynamicResource m_To}" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding DepartureTime}" 
+                        <GridViewColumn DisplayMemberBinding="{Binding AvailableOrders.DepartureTime}" 
                   Header="{DynamicResource m_When}" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Cost}" 
+                        <GridViewColumn DisplayMemberBinding="{Binding AvailableOrders.Cost}" 
                   Header="{DynamicResource m_CostInfo}" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding OrderTime}" 
                   Header="{DynamicResource m_OrderTimeInfo}" Width="150"/>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{DynamicResource CloseRedButton}" 
+                                            Command="{Binding Path=DataContext.RemoveOrderCommand, RelativeSource={RelativeSource AncestorType=ListView, 
+                                               Mode=FindAncestor}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
+                    
                 </ListView.View>
             </ListView>
         </ScrollViewer>

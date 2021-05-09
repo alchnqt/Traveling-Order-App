@@ -12,8 +12,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
             <RowDefinition/>
-            <RowDefinition Height="7"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -23,9 +25,9 @@
             <ColumnDefinition Width="149*"/>
             <ColumnDefinition Width="18*"/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource InputTextBox}" 
+        <TextBox Grid.Column="1" Grid.Row="2" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource InputTextBox}" 
                  Text="{Binding SelectedAccount.UserLogin, UpdateSourceTrigger=PropertyChanged}"/>
-        <PasswordBox Grid.Row="3" Grid.Column="1"  Height="30" VerticalAlignment="Top" Style="{DynamicResource InputPasswordBox}">
+        <PasswordBox Grid.Row="4" Grid.Column="1"  Height="30" VerticalAlignment="Top" Style="{DynamicResource InputPasswordBox}">
             <i:Interaction.Behaviors>
                 <b:DependecyPropertyBehavior 
                 UpdateEvent="PasswordChanged"
@@ -34,7 +36,9 @@
                 />
             </i:Interaction.Behaviors>
         </PasswordBox>
-        <Button  Grid.Row="4" Grid.Column="1" Height="45" Style="{DynamicResource InputButton}" Command="{Binding SignInCommand}" Content="{DynamicResource m_SignIn}" />
+        <Button FontFamily="Javanese Text" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Login}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
+        <Button FontFamily="Javanese Text" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Password}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"/>
+        <Button  Grid.Row="5" Grid.Column="1" Height="45" Style="{DynamicResource InputButton}" Command="{Binding SignInCommand}" Content="{DynamicResource m_SignIn}" />
        
     </Grid>
 </UserControl>

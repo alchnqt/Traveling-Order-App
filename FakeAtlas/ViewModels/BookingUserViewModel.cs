@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using FakeAtlas.Context.UnitOfWork;
+using FakeAtlas.Models.Entities;
+using FakeAtlas.ViewModels.Management;
 using Microsoft.VisualStudio.PlatformUI;
 
 namespace FakeAtlas.ViewModels
@@ -50,13 +52,15 @@ namespace FakeAtlas.ViewModels
             {
                 using (UnitOfWork unit = new())
                 {
-                    unit.UniqueAddress.Update(SelectedAddress);
+                    unit.AddressRepository.Update(SelectedAddress);
+                    unit.BookingUsers.Update(SelectedUser);
                     unit.Save();
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                FakeAtlasMessageBoxService box = new();
+                box.ShowMessage(e.Message);
             }
         }
     }
