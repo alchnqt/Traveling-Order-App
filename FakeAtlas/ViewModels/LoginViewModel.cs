@@ -62,30 +62,27 @@ namespace FakeAtlas.ViewModels
 
         public LoginViewModel()
         {
-            SignInCommand = new RelayCommand(o => SignInClick());
-            SignUpCommand = new RelayCommand(o => SignUpClick());
             _selectedViewModel = new SignInViewModel();
             SignInViewModel.LoginView = this;
-            
         }
 
         #region Commands
 
+        private ICommand _signInCommand;
+        public ICommand SignInCommand => _signInCommand ??= new DelegateCommand(signInClick);
+        private ICommand _signUpCommand;
+        public ICommand SignUpCommand => _signUpCommand ??= new DelegateCommand(signUpClick);
 
-        public ICommand UpdateViewCommand { get; set; }
-
-        public ICommand SignInCommand { get; set; }
-        
-        private void SignInClick()
+        private void signInClick()
         {
             ToSignUpVisibility = Visibility.Visible;
             ToSignInVisibility = Visibility.Collapsed;
             SelectedViewModel = new SignInViewModel();
         }
 
-        public ICommand SignUpCommand { get; set; }
+        public ICommand sSignUpCommand { get; set; }
 
-        private void SignUpClick()
+        private void signUpClick()
         {
             SelectedViewModel = new SignUpViewModel();
             ToSignUpVisibility = Visibility.Collapsed;

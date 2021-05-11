@@ -11,12 +11,12 @@ using System.Windows;
 using System.Windows.Input;
 using FakeAtlas.Encryption;
 using FakeAtlas.Models.Entities;
+using Microsoft.VisualStudio.PlatformUI;
 
 namespace FakeAtlas.ViewModels
 {
     public class SignInViewModel : ViewModelBase
     {
-        private readonly UnitOfWork unitOfWork;
 
         private BookingUser _selectedAccount = new();
 
@@ -45,33 +45,34 @@ namespace FakeAtlas.ViewModels
 
         public SignInViewModel()
         {
-            unitOfWork = new UnitOfWork();
-            SignInCommand = new RelayCommand(o => SignInClick());
         }
 
-        public ICommand SignInCommand { get; set; }
+        private ICommand signInCommand;
+        public ICommand SignInCommand => signInCommand ??= new DelegateCommand(SignIn);
 
-        private void SignInClick()
+        private void SignIn()
         {
             try
             {
-                Encoding enc = Encoding.UTF8;
-                var salt = (from user in unitOfWork.BookingUsers.Get() where user.UserLogin.Equals(SelectedAccount.UserLogin) select user).Single();
-                byte[] result = AtlasCrypto.GenerateSaltedHash(enc.GetBytes(UnsecurePassword), Convert.FromBase64String(salt.Salt));
+                using (UnitOfWork unitOfWork = new())
+                {
+                    Encoding enc = Encoding.UTF8;
+                    var salt = (from user in unitOfWork.BookingUsers.Get() where user.UserLogin.Equals(SelectedAccount.UserLogin) select user).Single();
+                    byte[] result = AtlasCrypto.GenerateSaltedHash(enc.GetBytes(UnsecurePassword), Convert.FromBase64String(salt.Salt));
 
 
-                MainWindowViewModel.User = (from user in unitOfWork.BookingUsers.Get()
-                                            where user.UserLogin.Equals(SelectedAccount.UserLogin)
-                                            && user.UserPassword.Equals(Convert.ToBase64String(result))
-                                            select user).Single();
+                    MainWindowViewModel.User = (from user in unitOfWork.BookingUsers.Get()
+                                                where user.UserLogin.Equals(SelectedAccount.UserLogin)
+                                                && user.UserPassword.Equals(Convert.ToBase64String(result))
+                                                select user).Single();
 
-                MainWindowViewModel.Address = (from address in unitOfWork.AddressRepository.Get() where address.Id == MainWindowViewModel.User.Id select address).Single();
-                
-                ProductionWindowFactory mainWindow = new();
-                WindowFactory factory = new(mainWindow);
-                factory.OpenWindow();
-                LoginView.CloseLoginWindow();
+                    MainWindowViewModel.Address = (from address in unitOfWork.AddressRepository.Get() where address.Id == MainWindowViewModel.User.Id select address).Single();
 
+                    ProductionWindowFactory mainWindow = new();
+                    WindowFactory factory = new(mainWindow);
+                    factory.OpenWindow();
+                    LoginView.CloseLoginWindow();
+                }
             }
             catch (Exception e)
             {
