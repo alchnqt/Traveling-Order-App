@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FakeAtlasMB\FA_EF_Core_Connection.csproj" />
+    <ProjectReference Include="..\FA_EF_Core_Connection\FA_EF_Core_Connection.csproj" />
   </ItemGroup>
 
   <ItemGroup>
