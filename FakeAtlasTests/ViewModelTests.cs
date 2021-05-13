@@ -28,14 +28,14 @@ namespace FakeAtlasTests
         }
 
         [Fact]
-        public void FindCommand__CanExeuteNThrowException_ReturnsTrue()
+        public void FindCommand__CanExeute_ReturnsTrue()
         {
             SearchViewModel view = new();
             Assert.True(view.FindCommand.CanExecute(null));
         }
 
         [Fact]
-        public void RemoveOrderCommand__CanExeuteNThrowException_ReturnsTrue()
+        public void RemoveOrderCommand__CanExeute_ReturnsTrue()
         {
             OrdersViewModel view = new();
             Assert.True(view.RemoveOrderCommand.CanExecute(null));
