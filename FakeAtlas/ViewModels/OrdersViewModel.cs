@@ -47,7 +47,8 @@ namespace FakeAtlas.ViewModels
         {
             using (UnitOfWork unit = new())
             {
-                Orders = new List<UserOrder>((from order in unit.UserOrderRepository.GetWithInclude(p => p.AvailableOrders) select order).ToList());
+                Orders = new List<UserOrder>((from order in unit.UserOrderRepository.GetWithInclude(p => p.AvailableOrders, u => u.Client)
+                    where order.Client.Id == MainWindowViewModel.User.Id select order).ToList());
             }
             
         }

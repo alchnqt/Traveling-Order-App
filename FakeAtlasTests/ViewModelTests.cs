@@ -12,7 +12,7 @@ namespace FakeAtlasTests
     public class ViewModelTests
     {
         [Fact]
-        public void SignInTest()
+        public void SignInCommand_CanExeuteNThrowException_ReturnsTrue()
         {
             SignInViewModel view = new();
             Assert.True(view.SignInCommand.CanExecute(null));
@@ -20,7 +20,7 @@ namespace FakeAtlasTests
         }
 
         [Fact]
-        public void SignUpTest()
+        public void SignUpCommand_CanExeuteNThrowException_ReturnsTrue()
         {
             SignUpViewModel view = new();
             Assert.True(view.SignUpCommand.CanExecute(null));
@@ -28,17 +28,19 @@ namespace FakeAtlasTests
         }
 
         [Fact]
-        public void SearchTest()
+        public void FindCommand__CanExeuteNThrowException_ReturnsTrue()
         {
             SearchViewModel view = new();
             Assert.True(view.FindCommand.CanExecute(null));
         }
 
         [Fact]
-        public void RemoveOrderTest()
+        public void RemoveOrderCommand__CanExeuteNThrowException_ReturnsTrue()
         {
             OrdersViewModel view = new();
             Assert.True(view.RemoveOrderCommand.CanExecute(null));
         }
+
+
     }
 }
