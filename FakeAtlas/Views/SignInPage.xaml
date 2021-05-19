@@ -38,7 +38,11 @@
         </PasswordBox>
         <Button FontFamily="Javanese Text" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Login}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
         <Button FontFamily="Javanese Text" Style="{DynamicResource LiteralButton}" Content="{DynamicResource m_Password}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"/>
-        <Button  Grid.Row="5" Grid.Column="1" Height="45" Style="{DynamicResource InputButton}" Command="{Binding SignInCommand}" Content="{DynamicResource m_SignIn}" />
-       
+        <Button  Grid.Row="5" Grid.Column="1" Height="45" Style="{DynamicResource InputButton}" Command="{Binding SignInCommand}" Content="{DynamicResource m_SignIn}">
+            <Button.InputBindings>
+                <KeyBinding Command="{Binding SignInCommand}" Gesture="Enter"/>
+            </Button.InputBindings>
+        </Button>
+
     </Grid>
 </UserControl>
