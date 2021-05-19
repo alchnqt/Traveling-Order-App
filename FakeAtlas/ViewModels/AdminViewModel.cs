@@ -172,13 +172,6 @@ namespace FakeAtlas.ViewModels
             {
                 using (UnitOfWork unit = new())
                 {
-                    var removingOrders = (from order in unit.AvailableOrdersRepository.GetWithInclude(o => o.Shipper) 
-                                          where order.ShipperId == SelectedShipper.Id select order);
-                    if(removingOrders != null)
-                    {
-                        unit.AvailableOrdersRepository.RemoveRange(removingOrders);
-                        unit.Save();
-                    }
                     unit.ShipperRepository.Remove(SelectedShipper);
                     unit.Save();
                     SelectedOrders = new ObservableCollection<AvailableOrder>(from item in unit.AvailableOrdersRepository.GetWithInclude(o => o.Shipper) select item);

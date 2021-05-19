@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakeAtlas.Views"
-             xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels"
+             xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:b="clr-namespace:FakeAtlas.Behavior"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=viewmodels:BookingUserViewModel}">
@@ -32,9 +32,10 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="35"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="64*"/>
-                <RowDefinition Height="64*"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
@@ -56,12 +57,23 @@
             <Button  Grid.Column="1" Foreground="#FF0B0A22" Grid.Row="5" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_Oblast}"/>
             <Button  Grid.Column="1" Foreground="#FF0B0A22" Grid.Row="7" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_Street}"/>
             <Button  Grid.Column="1" Foreground="#FF0B0A22" Grid.Row="9" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_BuildingNum}" Background="#FF2A2649"/>
+            <Button  Grid.Column="1" Foreground="#FF0B0A22" Grid.Row="11" Style="{DynamicResource LiteralButton}" HorizontalAlignment="Left" Content="{DynamicResource m_Password}" Background="#FF2A2649"/>
             <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="1" Text="{Binding SelectedUser.FullName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="3" Text="{Binding SelectedAddress.City, UpdateSourceTrigger=PropertyChanged}"  />
             <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="5" Text="{Binding SelectedAddress.Oblast, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="7" Text="{Binding SelectedAddress.StreetName, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox Style="{DynamicResource InputTextBox}" Grid.ColumnSpan="8" Grid.Column="2"  Grid.Row="9" Text="{Binding SelectedAddress.BuildingNum, UpdateSourceTrigger=PropertyChanged}"/>
+            <PasswordBox Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="8" Height="30" VerticalAlignment="Top" Style="{DynamicResource InputPasswordBox}">
+                <i:Interaction.Behaviors>
+                    <b:DependecyPropertyBehavior 
+                UpdateEvent="PasswordChanged"
+                Property="Password"
+                Binding="{Binding UnsecurePassword, UpdateSourceTrigger=PropertyChanged}"
+                />
+                </i:Interaction.Behaviors>
+            </PasswordBox>
             <Button  Style="{DynamicResource TiledButton}" Command="{Binding SaveCommand}" FontWeight="UltraBlack" Grid.Column="9" Grid.Row="13" Content="{DynamicResource m_Save}" FontSize="13"/>
+            
         </Grid>
     </Border>
 </UserControl>

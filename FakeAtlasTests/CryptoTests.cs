@@ -28,5 +28,7 @@ namespace FakeAtlasTests
             byte[] encryptedPassword = AtlasCrypto.GenerateSaltedHash(Encoding.UTF8.GetBytes(password), salt);
             Assert.NotEqual(alrdyHashedPassword, Convert.ToBase64String(encryptedPassword));
         }
+
+
     }
 }

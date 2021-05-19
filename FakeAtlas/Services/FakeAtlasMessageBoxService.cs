@@ -13,6 +13,7 @@ namespace FakeAtlas.ViewModels.Management
     {
         bool ShowMessage(string text);
         bool Show();
+        bool ShowMessage(FakeAtlasMessageBox.MessageType type, ViewModelBase.Localization localization);
     }
 
     class FakeAtlasMessageBoxService : IMessageBoxService

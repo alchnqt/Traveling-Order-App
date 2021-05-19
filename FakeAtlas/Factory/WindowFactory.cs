@@ -37,9 +37,8 @@ namespace FakeAtlas.ViewModels.Management
     }
     #endregion
 
-
     #region specific factory implemintation
-    public class ProductionWindowFactory : IWindowFactory
+    public class MainWindowFactory : IWindowFactory
     {
         public void CreateNewWindow()
         {
@@ -61,5 +60,5 @@ namespace FakeAtlas.ViewModels.Management
             window.Show();
         }
     }
-}
     #endregion
+}

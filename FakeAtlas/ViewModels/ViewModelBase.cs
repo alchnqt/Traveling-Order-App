@@ -13,30 +13,22 @@ using System.Windows.Input;
 
 namespace FakeAtlas.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged, IViewModel, ICloseWindow, IMinimizeWindow, IMaximizeWindow, IRestoreWindow
+    public class ViewModelBase : INotifyPropertyChanged, ICloseWindow, IMinimizeWindow, IMaximizeWindow, IRestoreWindow
     {
         /// <summary>
         /// Localization capture enum
         /// </summary>
         public enum Localization
         {
-            ru_RU = 0x000,
-            en_GB = 0x001
+            ru_RU = 0x002,
+            en_GB = 0x004
         }
 
-        public static Localization CurrentLocalization { get; set; }
+        public static Localization CurrentLocalization { get; set; } = Thread.CurrentThread.CurrentCulture.Name == "ru-RU" ? Localization.ru_RU : Localization.en_GB;
 
         public ViewModelBase()
         {
-            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
-            if(currentCulture.Name == "ru-RU")
-            {
-                CurrentLocalization = Localization.ru_RU;
-            }
-            else
-            {
-                CurrentLocalization = Localization.en_GB;
-            }
+            
         }
 
         /// <summary>
@@ -44,7 +36,6 @@ namespace FakeAtlas.ViewModels
         /// </summary>      
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
         public void OnPropertyChanged([CallerMemberName] string prop = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-
 
         private Visibility restoreVisibility = Visibility.Collapsed;
         private Visibility maximizeVisibility = Visibility.Visible;
@@ -91,7 +82,6 @@ namespace FakeAtlas.ViewModels
             }
         }
 
-
         #region Basic Commands
 
 
@@ -116,9 +106,9 @@ namespace FakeAtlas.ViewModels
             Application.Current.Resources.MergedDictionaries[0] = new ResourceDictionary() { Source = currentRsrc };
             CurrentLocalization = Localization.ru_RU;
         }
-        private DelegateCommand _closeCommand;
+        private ICommand _closeCommand;
 
-        public DelegateCommand CloseCommand => _closeCommand ??= new DelegateCommand(CloseWindow);
+        public ICommand CloseCommand => _closeCommand ??= new DelegateCommand(CloseWindow);
 
         protected void CloseWindow() => Close?.Invoke();
 
@@ -126,9 +116,9 @@ namespace FakeAtlas.ViewModels
 
         public Action Close { get; set; }
 
-        private DelegateCommand _minimizeCommand;
+        private ICommand _minimizeCommand;
 
-        public DelegateCommand MinimizeCommand => _minimizeCommand ??= new DelegateCommand(MinimizeWindow);
+        public ICommand MinimizeCommand => _minimizeCommand ??= new DelegateCommand(MinimizeWindow);
 
         private void MinimizeWindow() => Minimize?.Invoke();
 
@@ -136,9 +126,9 @@ namespace FakeAtlas.ViewModels
 
         public Action Maximize { get; set; }
 
-        private DelegateCommand _maximizeCommand;
+        private ICommand _maximizeCommand;
 
-        public DelegateCommand MaximizeCommand => _maximizeCommand ??= new DelegateCommand(MaximizeWindow);
+        public ICommand MaximizeCommand => _maximizeCommand ??= new DelegateCommand(MaximizeWindow);
 
         private void MaximizeWindow()
         {
@@ -152,9 +142,9 @@ namespace FakeAtlas.ViewModels
 
         public Action Restore { get; set; }
 
-        private DelegateCommand _restoreCommand;
+        private ICommand _restoreCommand;
 
-        public DelegateCommand RestoreCommand => _restoreCommand ??= new DelegateCommand(RestoreWindow);
+        public ICommand RestoreCommand => _restoreCommand ??= new DelegateCommand(RestoreWindow);
 
         private void RestoreWindow()
         {

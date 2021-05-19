@@ -68,7 +68,7 @@ namespace FakeAtlas.ViewModels
 
                     MainWindowViewModel.Address = (from address in unitOfWork.AddressRepository.Get() where address.Id == MainWindowViewModel.User.Id select address).Single();
 
-                    ProductionWindowFactory mainWindow = new();
+                    MainWindowFactory mainWindow = new();
                     WindowFactory factory = new(mainWindow);
                     factory.OpenWindow();
                     LoginView.CloseLoginWindow();

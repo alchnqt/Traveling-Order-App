@@ -61,7 +61,8 @@ namespace FakeAtlas
                 entity.HasOne(d => d.Shipper)
                     .WithMany(p => p.AvailableOrders)
                     .HasForeignKey(d => d.ShipperId)
-                    .HasConstraintName("fk_shipper_id");
+                    .HasConstraintName("fk_shipper_id")
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<BookingUser>(entity =>

@@ -9,26 +9,16 @@
   </Class>
   <Class Name="FakeAtlas.Context.UnitOfWork.UnitOfWork" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="6" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAIAAIAAACARQAAAAEAAAACIAAAAgAAAgAAgAIEAAEA=</HashCode>
-      <FileName>Context\UnitOfWork\UnitOfWork.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <TypeIdentifier />
   </Class>
   <Class Name="FakeAtlas.Context.Repository.BookingDBRepository&lt;TEntity&gt;" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="7.75" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAgAAAAAABABAAAAALAAAAAABAEAAAAAAAIAAAAA=</HashCode>
-      <FileName>Context\Repository\BookingDBRepository.cs</FileName>
-    </TypeIdentifier>
+    <TypeIdentifier />
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="FakeAtlas.BookingDBContext" Collapsed="true">
     <Position X="6" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAQQQAAAgAAAAABAAEAACAAAAAAAAAAAAAEA=</HashCode>
-      <FileName>Context\BookingDBContext.cs</FileName>
-    </TypeIdentifier>
+    <TypeIdentifier />
   </Class>
   <Class Name="FakeAtlas.Encryption.AtlasCrypto" Collapsed="true">
     <Position X="9.75" Y="3.5" Width="1.5" />
@@ -39,79 +29,61 @@
   </Class>
   <Class Name="FakeAtlas.Models.Entities.AvailableOrder" Collapsed="true">
     <Position X="0.5" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAEAIAIAIAAAABgAAAACAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Entities\AvailableOrder.cs</FileName>
-    </TypeIdentifier>
+    <TypeIdentifier />
   </Class>
   <Class Name="FakeAtlas.Models.Entities.BookingUser" Collapsed="true">
     <Position X="2.25" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>EABCAAAAAAAAAIAAAAAAAAAACAAiAAAAAAAAAAIAAAA=</HashCode>
-      <FileName>Models\Entities\BookingUser.cs</FileName>
-    </TypeIdentifier>
+    <TypeIdentifier />
   </Class>
   <Class Name="FakeAtlas.Models.Entities.Order" Collapsed="true">
     <Position X="4" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAEAIAIAoEAAAAgAAAAAAAAAAAAAAAAAAAQ=</HashCode>
-      <FileName>Models\Entities\Order.cs</FileName>
-    </TypeIdentifier>
+    <TypeIdentifier />
   </Class>
   <Class Name="FakeAtlas.Models.Entities.Shipper" Collapsed="true">
     <Position X="0.5" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAIAAAAAAABAAAAAAAAAAAAAAAAACCAA=</HashCode>
-      <FileName>Models\Entities\Shipper.cs</FileName>
-    </TypeIdentifier>
+    <TypeIdentifier />
   </Class>
   <Class Name="FakeAtlas.Models.Entities.UniqueAddress" Collapsed="true">
     <Position X="2.25" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>QAACAAAAAAAAAACIAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
-      <FileName>Models\Entities\UniqueAddress.cs</FileName>
-    </TypeIdentifier>
+    <TypeIdentifier />
   </Class>
   <Class Name="FakeAtlas.Models.Entities.UserOrder" Collapsed="true">
     <Position X="4" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAgEAAABAAAAAAAAAAAAAAAAAAAIQ=</HashCode>
-      <FileName>Models\Entities\UserOrder.cs</FileName>
-    </TypeIdentifier>
+    <TypeIdentifier />
   </Class>
   <Class Name="FakeAtlas.ViewModels.Management.WindowMinimizer" Collapsed="true">
     <Position X="11.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAAAAAAACAA=</HashCode>
-      <FileName>ViewModels\Management\BasicWindowCommands.cs</FileName>
+      <FileName>ViewModels\Commands\BasicWindowCommands.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.ViewModels.Management.WindowCloser" Collapsed="true">
     <Position X="11.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAACAAAAQAAAAAAIAAA=</HashCode>
-      <FileName>ViewModels\Management\BasicWindowCommands.cs</FileName>
+      <FileName>ViewModels\Commands\BasicWindowCommands.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.ViewModels.Management.WindowMaximizer" Collapsed="true">
     <Position X="15.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAIgAAAAAAAAAAACAAAAAQAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\Management\BasicWindowCommands.cs</FileName>
+      <FileName>ViewModels\Commands\BasicWindowCommands.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.ViewModels.Management.WindowRestorer" Collapsed="true">
     <Position X="13.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAgAAAgAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\Management\BasicWindowCommands.cs</FileName>
+      <FileName>ViewModels\Commands\BasicWindowCommands.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.ViewModels.Management.FakeAtlasMessageBoxService" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="11.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\Management\FakeAtlasMessageBoxService.cs</FileName>
+      <FileName>Services\FakeAtlasMessageBoxService.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -119,14 +91,14 @@
     <Position X="13.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAACAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\Management\WindowFactory.cs</FileName>
+      <FileName>Factory\WindowFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FakeAtlas.ViewModels.Management.ProductionWindowFactory" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="FakeAtlas.ViewModels.Management.MainWindowFactory" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="15.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
-      <FileName>ViewModels\Management\WindowFactory.cs</FileName>
+      <FileName>Factory\WindowFactory.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -134,76 +106,76 @@
     <Position X="13.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
-      <FileName>ViewModels\Management\WindowFactory.cs</FileName>
+      <FileName>Factory\WindowFactory.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="FakeAtlas.ViewModels.AdminViewModel" Collapsed="true">
-    <Position X="4" Y="9.5" Width="1.5" />
+  <Class Name="FakeAtlas.ViewModels.AdminViewModel">
+    <Position X="7.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAUQAAAAAgABAEIgBgAEBAAAAEBACFAQAhCKAAQAA=</HashCode>
       <FileName>ViewModels\AdminViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FakeAtlas.ViewModels.BookingUserViewModel" Collapsed="true">
-    <Position X="10.75" Y="9.5" Width="1.5" />
+  <Class Name="FakeAtlas.ViewModels.BookingUserViewModel">
+    <Position X="11" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAAAAgAAAAAACAAAAIQAAAQEAAA=</HashCode>
       <FileName>ViewModels\BookingUserViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.ViewModels.HelpViewModel" Collapsed="true">
-    <Position X="17.5" Y="9.5" Width="1.5" />
+    <Position X="16.75" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\HelpViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FakeAtlas.ViewModels.LoginViewModel" Collapsed="true">
-    <Position X="6.25" Y="9.5" Width="1.5" />
+  <Class Name="FakeAtlas.ViewModels.LoginViewModel">
+    <Position X="5.5" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAEBCBAAQAAAAAQAAAAAAAAkAAAAAAAIAAEAAQAAAA=</HashCode>
+      <HashCode>AAAABCBABQAQAAAQAABAAQAAkAAAAAAAJAAEAAAAAAA=</HashCode>
       <FileName>ViewModels\LoginViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FakeAtlas.ViewModels.MainWindowViewModel" Collapsed="true">
-    <Position X="13" Y="9.5" Width="1.5" />
+  <Class Name="FakeAtlas.ViewModels.MainWindowViewModel">
+    <Position X="13" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEBjAAAAYgYAEEQIgBAAAAAAEAYEIBDAAAAAEAAAAA=</HashCode>
       <FileName>ViewModels\MainWindowViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FakeAtlas.ViewModels.OrdersViewModel" Collapsed="true">
-    <Position X="19.75" Y="9.5" Width="1.5" />
+  <Class Name="FakeAtlas.ViewModels.OrdersViewModel">
+    <Position X="20.25" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAAAAEgAAAAIAAAAAAAAAAAAAAAAQAAACAAAAA=</HashCode>
       <FileName>ViewModels\OrdersViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FakeAtlas.ViewModels.RelayCommand" Collapsed="true">
-    <Position X="24.5" Y="8.25" Width="1.5" />
+    <Position X="24.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\RelayCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="FakeAtlas.ViewModels.SearchViewModel" Collapsed="true">
-    <Position X="8.5" Y="9.5" Width="1.5" />
+  <Class Name="FakeAtlas.ViewModels.SearchViewModel">
+    <Position X="9.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAIABABAAAAEAIAABEAAAAQAAAAAA=</HashCode>
       <FileName>ViewModels\SearchViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FakeAtlas.ViewModels.SignInViewModel" Collapsed="true">
-    <Position X="15.25" Y="9.5" Width="1.5" />
+  <Class Name="FakeAtlas.ViewModels.SignInViewModel">
+    <Position X="14.75" Y="10.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAEAAAAAAAACAgAAAAEAAAAAAAARBAAA=</HashCode>
+      <HashCode>AAAEAACAAAAAAEAAAACAAAAAgAAAAEAAAAAAAABBAAA=</HashCode>
       <FileName>ViewModels\SignInViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FakeAtlas.ViewModels.SignUpViewModel" Collapsed="true">
-    <Position X="22" Y="9.5" Width="1.5" />
+  <Class Name="FakeAtlas.ViewModels.SignUpViewModel">
+    <Position X="18.5" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEACAAAAAgCVAACAAAAgAAAgAAIEBAAAAAABABABA=</HashCode>
       <FileName>ViewModels\SignUpViewModel.cs</FileName>
@@ -211,7 +183,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="FakeAtlas.ViewModels.ViewModelBase" Collapsed="true">
-    <Position X="13" Y="8.25" Width="1.5" />
+    <Position X="12.75" Y="7.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="FakeAtlas.ViewModels.ViewModelBase.Localization" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\ViewModelBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>UEEAIEEAAAQAQABCIggCgGAIgAAAAgAACSJCBALgAhI=</HashCode>
       <FileName>ViewModels\ViewModelBase.cs</FileName>
@@ -220,58 +199,48 @@
   </Class>
   <Interface Name="FakeAtlas.Context.Repository.IRepository&lt;TEntity&gt;" Collapsed="true">
     <Position X="6" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAABAAAAABAAAAAABAEAAAAAAAAAAAAA=</HashCode>
-      <FileName>Context\Repository\IRepository.cs</FileName>
-    </TypeIdentifier>
+    <TypeIdentifier />
   </Interface>
   <Interface Name="FakeAtlas.ViewModels.Management.IMinimizeWindow" Collapsed="true">
-    <Position X="11.75" Y="5.75" Width="1.5" />
+    <Position X="10" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgA=</HashCode>
-      <FileName>ViewModels\Management\BasicWindowCommands.cs</FileName>
+      <FileName>ViewModels\Commands\BasicWindowCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="FakeAtlas.ViewModels.Management.ICloseWindow" Collapsed="true">
     <Position X="11.75" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAACAAAA=</HashCode>
-      <FileName>ViewModels\Management\BasicWindowCommands.cs</FileName>
+      <FileName>ViewModels\Commands\BasicWindowCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="FakeAtlas.ViewModels.Management.IMaximizeWindow" Collapsed="true">
     <Position X="13.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAI=</HashCode>
-      <FileName>ViewModels\Management\BasicWindowCommands.cs</FileName>
+      <FileName>ViewModels\Commands\BasicWindowCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="FakeAtlas.ViewModels.Management.IRestoreWindow" Collapsed="true">
-    <Position X="13.5" Y="5.75" Width="1.5" />
+    <Position X="17.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAACAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\Management\BasicWindowCommands.cs</FileName>
+      <FileName>ViewModels\Commands\BasicWindowCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="FakeAtlas.ViewModels.Management.IMessageBoxService" Collapsed="true">
     <Position X="15.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\Management\FakeAtlasMessageBoxService.cs</FileName>
+      <FileName>Services\FakeAtlasMessageBoxService.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="FakeAtlas.ViewModels.Management.IWindowFactory" Collapsed="true">
-    <Position X="15.25" Y="5.75" Width="1.5" />
+    <Position X="17.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
-      <FileName>ViewModels\Management\WindowFactory.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="FakeAtlas.ViewModels.IViewModel" Collapsed="true">
-    <Position X="24.5" Y="9.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\IViewModel.cs</FileName>
+      <FileName>Factory\WindowFactory.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />
