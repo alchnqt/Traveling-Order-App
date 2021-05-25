@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -15,6 +16,12 @@ namespace FakeAtlas.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged, ICloseWindow, IMinimizeWindow, IMaximizeWindow, IRestoreWindow
     {
+        /// <summary>
+        /// Sign in/up and password changing validation
+        /// </summary>
+        protected static Regex loginRegex = new(@"^.{5,20}$");
+        protected static Regex passwordRegex = new(@"^.{8,}$");
+
         /// <summary>
         /// Localization capture enum
         /// </summary>

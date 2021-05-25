@@ -56,13 +56,25 @@ namespace FakeAtlas.ViewModels
         private ICommand saveCommand;
         public ICommand SaveCommand => saveCommand ??= new DelegateCommand(Save);
 
+        private bool ValidatePassword(string password)
+        {
+            if (!string.IsNullOrEmpty(UnsecurePassword))
+                return passwordRegex.IsMatch(UnsecurePassword);
+            else
+                return false;
+
+        }
+
         private void Save()
         {
             try
             {
-                byte[] salt = AtlasCrypto.GetSalt();
-                SelectedUser.UserPassword = Convert.ToBase64String(AtlasCrypto.GenerateSaltedHash(Encoding.UTF8.GetBytes(UnsecurePassword), salt));
-                SelectedUser.Salt = Convert.ToBase64String(salt);
+                if(ValidatePassword(UnsecurePassword))
+                {
+                    byte[] salt = AtlasCrypto.GetSalt();
+                    SelectedUser.UserPassword = Convert.ToBase64String(AtlasCrypto.GenerateSaltedHash(Encoding.UTF8.GetBytes(UnsecurePassword), salt));
+                    SelectedUser.Salt = Convert.ToBase64String(salt);
+                }
                 using (UnitOfWork unit = new())
                 {
                     unit.AddressRepository.Update(SelectedAddress);

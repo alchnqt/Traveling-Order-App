@@ -22,9 +22,6 @@ namespace FakeAtlas.ViewModels
     {
         private BookingUser _selectedAccount = new();
 
-        public static Regex loginRegex = new(@"^.{5,20}$");
-        public static Regex passwordRegex = new(@"^.{8, }$");
-
         public BookingUser SelectedAccount
         {
             get { return _selectedAccount; }
@@ -134,6 +131,7 @@ namespace FakeAtlas.ViewModels
                         IdAddress = (from adrs in unitOfWork.AddressRepository.Get() select adrs).Last().Id
                     });
                     unitOfWork.Save();
+                    box.ShowMessage(FakeAtlasMessageBox.MessageType.SuccessfulRegistration, CurrentLocalization);
                 }
             }
             catch (Exception e)
