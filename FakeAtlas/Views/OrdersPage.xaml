@@ -40,7 +40,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding AvailableOrders.PathTo}" 
                   Header="{DynamicResource m_To}" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding AvailableOrders.DepartureTime}" 
-                  Header="{DynamicResource m_When}" Width="100"/>
+                  Header="{DynamicResource m_When}" Width="auto"/>
                         <GridViewColumn DisplayMemberBinding="{Binding AvailableOrders.Cost}" 
                   Header="{DynamicResource m_CostInfo}" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding OrderTime}" 
