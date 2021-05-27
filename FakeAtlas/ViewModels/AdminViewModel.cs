@@ -24,6 +24,7 @@ namespace FakeAtlas.ViewModels
         public static Regex DigitalRegex = new(@"^\d$");
         #endregion
 
+        #region Collections
         private ObservableCollection<AvailableOrder> _selectedOrders = new();
 
         public ObservableCollection<AvailableOrder> SelectedOrders
@@ -48,6 +49,17 @@ namespace FakeAtlas.ViewModels
             }
         }
 
+        private ObservableCollection<BookingUser> _selectedUsers = new();
+
+        public ObservableCollection<BookingUser> SelectedUsers
+        {
+            get { return _selectedUsers; }
+            set { _selectedUsers = value; OnPropertyChanged(nameof(SelectedUsers)); }
+        }
+
+        #endregion
+
+        #region SelectedItems in ListView
         private AvailableOrder _selectedOrder = new();
 
         public AvailableOrder SelectedOrder
@@ -86,12 +98,52 @@ namespace FakeAtlas.ViewModels
             }
         }
 
+        private BookingUser _selectedUser;
+
+        public BookingUser SelectedUser
+        {
+            get { return _selectedUser; }
+            set { _selectedUser = value; OnPropertyChanged(nameof(SelectedUser)); }
+        }
+        #endregion
+
+        #region Items binding to creation
+
+        private AvailableOrder _selectedOrderCreating = new();
+
+        public AvailableOrder SelectedOrderCreating
+        {
+            get { return _selectedOrderCreating; }
+            set
+            {
+                _selectedOrderCreating = value;
+                CompanyName = value.Shipper == null ? CompanyName : value.Shipper.FullName;
+                OnPropertyChanged(nameof(SelectedOrderCreating));
+            }
+        }
+
+        private Shipper _selectedShipperCreating = new();
+
+        public Shipper SelectedShipperCreating
+        {
+            get { return _selectedShipperCreating; }
+            set
+            {
+                _selectedShipperCreating = value;
+                CompanyName = value.FullName;
+                OnPropertyChanged(nameof(SelectedShipperCreating));
+            }
+        }
+
+        #endregion
+
         public AdminViewModel()
         {
             using (UnitOfWork unit = new())
             {
                 SelectedOrders = new ObservableCollection<AvailableOrder>(from item in unit.AvailableOrdersRepository.GetWithInclude(o => o.Shipper) select item);
                 SelectedShippers = new ObservableCollection<Shipper>(from item in unit.ShipperRepository.GetWithInclude(o => o.AvailableOrders) select item);
+                SelectedUsers = new ObservableCollection<BookingUser>(from item in unit.BookingUsers.Get() where !item.IsAdmin select item);
             }
         }
 
@@ -100,27 +152,30 @@ namespace FakeAtlas.ViewModels
 
         private void SaveCompany()
         {
-            INumberValidater ordersService = new CompanyService();
+            INumberValidator ordersService = new CompanyService();
             IMessageBoxService box = new FakeAtlasMessageBoxService();
             try
             {
-                if (!ordersService.ValidateVehiclesAmount(SelectedShipper.VehicleNum.Value))
-                {
-                    box.ShowMessage(FakeAtlasMessageBox.MessageType.InvalidNumber, CurrentLocalization);
-                    return;
-                }
-
                 using (UnitOfWork unit = new())
                 {
-
-                    if (SelectedShipper != null)
-                        unit.ShipperRepository.Update(SelectedShipper);
-                    else
-                        unit.ShipperRepository.Create(SelectedShipper);
-                    unit.Save();
-                    SelectedShippers = new ObservableCollection<Shipper>(from item in unit.ShipperRepository.GetWithInclude(o => o.AvailableOrders) select item);
-                    SelectedOrder = new();
-                    SelectedShipper = new();
+                    try
+                    {
+                        if (!ordersService.ValidateVehiclesAmount(SelectedShipperCreating.VehicleNum.Value))
+                        {
+                            box.ShowMessage(FakeAtlasMessageBox.MessageType.InvalidNumber, CurrentLocalization);
+                            return;
+                        }
+                    }
+                    finally
+                    {
+                        unit.ShipperRepository.Create(SelectedShipperCreating);
+                        unit.Save();
+                        SelectedShippers = new ObservableCollection<Shipper>(from item in unit.ShipperRepository.GetWithInclude(o => o.AvailableOrders) select item);
+                        SelectedOrder = new();
+                        SelectedShipper = new();
+                        SelectedOrderCreating = new();
+                        SelectedShipperCreating = new();
+                    }
                 }
             }
 
@@ -135,12 +190,12 @@ namespace FakeAtlas.ViewModels
 
         private void SaveRoute()
         {
-            INumberValidater ordersService = new CompanyService();
+            INumberValidator ordersService = new CompanyService();
             IMessageBoxService box = new FakeAtlasMessageBoxService();
             try
             {
 
-                if (!ordersService.ValidateRouteCost(SelectedOrder.Cost.Value))
+                if (!ordersService.ValidateRouteCost(SelectedOrderCreating.Cost.Value))
                 {
                     box.ShowMessage(FakeAtlasMessageBox.MessageType.InvalidNumber, CurrentLocalization);
                     return;
@@ -148,20 +203,14 @@ namespace FakeAtlas.ViewModels
 
                 using (UnitOfWork unit = new())
                 {
-                    SelectedOrder.ShipperId = (from order in unit.ShipperRepository.GetWithInclude(a => a.AvailableOrders) 
-                                               where order.FullName.Equals(CompanyName) select order).SingleOrDefault().Id;
-                    if(SelectedOrder != null)
-                    {
-                        unit.AvailableOrdersRepository.Update(SelectedOrder);
-                    }
-                    else
-                    {
-                        unit.AvailableOrdersRepository.Create(SelectedOrder);
-                    }
+                    unit.AvailableOrdersRepository.Create(SelectedOrderCreating);
                     unit.Save();
                     SelectedOrders = new ObservableCollection<AvailableOrder>(from item in unit.AvailableOrdersRepository.GetWithInclude(o => o.Shipper) select item);
+                    
                     SelectedOrder = new();
                     SelectedShipper = new();
+                    SelectedOrderCreating = new();
+                    SelectedShipperCreating = new();
                 }
             }
             catch (Exception e)
@@ -214,6 +263,30 @@ namespace FakeAtlas.ViewModels
             {
                 FakeAtlasMessageBoxService box = new();
                 box.ShowMessage(FakeAtlasMessageBox.MessageType.DeleteCompanyError, CurrentLocalization);
+            }
+        }
+
+        private ICommand removeUserCommand;
+        public ICommand RemoveUserCommand => removeUserCommand ??= new DelegateCommand(RemoveUser);
+
+        private void RemoveUser()
+        {
+            try
+            {
+                using (UnitOfWork unit = new())
+                {
+                    unit.BookingUsers.Remove(SelectedUser);
+                    unit.Save();
+                    SelectedUsers = new ObservableCollection<BookingUser>(from item in unit.BookingUsers.Get() where !item.IsAdmin select item);
+                    SelectedUser = new();
+                    SelectedOrder = new();
+                    SelectedShipper = new();
+                }
+            }
+            catch (Exception e)
+            {
+                FakeAtlasMessageBoxService box = new();
+                box.ShowMessage(FakeAtlasMessageBox.MessageType.DeleteOrderError, CurrentLocalization);
             }
         }
     }

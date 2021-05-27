@@ -14,21 +14,21 @@ namespace FakeAtlasTests
         [Fact]
         public void ValidateVehicleAmount_WithNegativeAmount_ReturnsFalse()
         {
-            INumberValidater service = new CompanyService();
+            INumberValidator service = new CompanyService();
             Assert.False(service.ValidateVehiclesAmount(-3));
         }
 
         [Fact]
         public void ValidateVehicleAmount_WithPositiveAmount_ReturnsTrue()
         {
-            INumberValidater service = new CompanyService();
+            INumberValidator service = new CompanyService();
             Assert.True(service.ValidateVehiclesAmount(4));
         }
 
         [Fact]
         public void ValidateVehicleAmount_WithZeroAmount_ReturnsFalse()
         {
-            INumberValidater service = new CompanyService();
+            INumberValidator service = new CompanyService();
             Assert.False(service.ValidateVehiclesAmount(0));
         }
 
@@ -36,21 +36,21 @@ namespace FakeAtlasTests
         [Fact]
         public void ValidateRouteCost_WithNegativeAmount_ReturnsFalse()
         {
-            INumberValidater service = new CompanyService();
+            INumberValidator service = new CompanyService();
             Assert.False(service.ValidateRouteCost(-3));
         }
 
         [Fact]
         public void ValidateRouteCost_WithPositiveAmount_ReturnsTrue()
         {
-            INumberValidater service = new CompanyService();
+            INumberValidator service = new CompanyService();
             Assert.True(service.ValidateRouteCost(4));
         }
 
         [Fact]
         public void ValidateRouteCost_WithZeroAmount_ReturnsFalse()
         {
-            INumberValidater service = new CompanyService();
+            INumberValidator service = new CompanyService();
             Assert.False(service.ValidateRouteCost(0));
         }
     }

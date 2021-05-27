@@ -10,14 +10,14 @@ using System.Windows;
 
 namespace FakeAtlas.Services
 {
-    public interface INumberValidater
+    public interface INumberValidator
     {
         bool ValidateRouteCost(int cost);
 
         bool ValidateVehiclesAmount(int num);
     }
 
-    public class CompanyService : INumberValidater
+    public class CompanyService : INumberValidator
     {
 
         public bool ValidateVehiclesAmount(int num) => num > 2 && num < 150;
