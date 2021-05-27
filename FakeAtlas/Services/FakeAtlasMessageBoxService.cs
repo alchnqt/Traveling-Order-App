@@ -18,32 +18,11 @@ namespace FakeAtlas.ViewModels.Management
 
     class FakeAtlasMessageBoxService : IMessageBoxService
     {
-        public bool Show()
-        {
-            FakeAtlasMessageBox box = new();
-            if (box.Show() == MessageBoxResult.OK)
-                return true;
-            else
-                return false;
-        }
+        public bool Show() => new FakeAtlasMessageBox().Show() == MessageBoxResult.OK;
 
-        public bool ShowMessage(string text)
-        {
-            FakeAtlasMessageBox box = new();
-            if (box.Show(text) == MessageBoxResult.OK)
-                return true;
-            else
-                return false;
-        }
+        public bool ShowMessage(string text) => new FakeAtlasMessageBox().Show(text) == MessageBoxResult.OK;
 
-        public bool ShowMessage(FakeAtlasMessageBox.MessageType type, ViewModelBase.Localization localization)
-        {
-            FakeAtlasMessageBox box = new();
-            if (box.Show(type, localization) == MessageBoxResult.OK)
-                return true;
-            else
-                return false;
-        }
+        public bool ShowMessage(FakeAtlasMessageBox.MessageType type, ViewModelBase.Localization localization) => new FakeAtlasMessageBox().Show(type, localization) == MessageBoxResult.OK;
     }
     #endregion
 }

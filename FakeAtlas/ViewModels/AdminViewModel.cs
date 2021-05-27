@@ -12,6 +12,7 @@ using FakeAtlas.Context.UnitOfWork;
 using System.Text.RegularExpressions;
 using FakeAtlas.ViewModels.Management;
 using FakeAtlas.FakeAtlasUIComponents;
+using FakeAtlas.Services;
 
 namespace FakeAtlas.ViewModels
 {
@@ -55,6 +56,7 @@ namespace FakeAtlas.ViewModels
             set
             {
                 _selectedOrder = value;
+                CompanyName = value.Shipper == null ? CompanyName : value.Shipper.FullName;
                 OnPropertyChanged(nameof(SelectedOrder));
             }
         }
@@ -67,6 +69,7 @@ namespace FakeAtlas.ViewModels
             set
             {
                 _selectedShipper = value;
+                CompanyName = value.FullName;
                 OnPropertyChanged(nameof(SelectedShipper));
             }
         }
@@ -97,21 +100,33 @@ namespace FakeAtlas.ViewModels
 
         private void SaveCompany()
         {
-            using (UnitOfWork unit = new())
+            INumberValidater ordersService = new CompanyService();
+            IMessageBoxService box = new FakeAtlasMessageBoxService();
+            try
             {
-                try
+                if (!ordersService.ValidateVehiclesAmount(SelectedShipper.VehicleNum.Value))
                 {
-                    unit.ShipperRepository.Create(SelectedShipper);
+                    box.ShowMessage(FakeAtlasMessageBox.MessageType.InvalidNumber, CurrentLocalization);
+                    return;
+                }
+
+                using (UnitOfWork unit = new())
+                {
+
+                    if (SelectedShipper != null)
+                        unit.ShipperRepository.Update(SelectedShipper);
+                    else
+                        unit.ShipperRepository.Create(SelectedShipper);
                     unit.Save();
                     SelectedShippers = new ObservableCollection<Shipper>(from item in unit.ShipperRepository.GetWithInclude(o => o.AvailableOrders) select item);
                     SelectedOrder = new();
                     SelectedShipper = new();
                 }
-                catch (Exception e)
-                {
-                    FakeAtlasMessageBoxService box = new();
-                    box.ShowMessage(e.Message);
-                }
+            }
+
+            catch (Exception e)
+            {
+                box.ShowMessage(e.Message);
             }
         }
 
@@ -120,13 +135,29 @@ namespace FakeAtlas.ViewModels
 
         private void SaveRoute()
         {
+            INumberValidater ordersService = new CompanyService();
+            IMessageBoxService box = new FakeAtlasMessageBoxService();
             try
             {
+
+                if (!ordersService.ValidateRouteCost(SelectedOrder.Cost.Value))
+                {
+                    box.ShowMessage(FakeAtlasMessageBox.MessageType.InvalidNumber, CurrentLocalization);
+                    return;
+                }
+
                 using (UnitOfWork unit = new())
                 {
-                    SelectedOrder.ShipperId = (from order in unit.ShipperRepository.Get() 
+                    SelectedOrder.ShipperId = (from order in unit.ShipperRepository.GetWithInclude(a => a.AvailableOrders) 
                                                where order.FullName.Equals(CompanyName) select order).SingleOrDefault().Id;
-                    unit.AvailableOrdersRepository.Create(SelectedOrder);
+                    if(SelectedOrder != null)
+                    {
+                        unit.AvailableOrdersRepository.Update(SelectedOrder);
+                    }
+                    else
+                    {
+                        unit.AvailableOrdersRepository.Create(SelectedOrder);
+                    }
                     unit.Save();
                     SelectedOrders = new ObservableCollection<AvailableOrder>(from item in unit.AvailableOrdersRepository.GetWithInclude(o => o.Shipper) select item);
                     SelectedOrder = new();
@@ -135,7 +166,6 @@ namespace FakeAtlas.ViewModels
             }
             catch (Exception e)
             {
-                FakeAtlasMessageBoxService box = new();
                 box.ShowMessage(e.Message);
             }
         }

@@ -77,7 +77,7 @@ namespace FakeAtlas.ViewModels
             catch (Exception e)
             {
                 FakeAtlasMessageBoxService box = new();
-                box.ShowMessage(FakeAtlasUIComponents.FakeAtlasMessageBox.MessageType.WrongPasswordOrLogin, CurrentLocalization);
+                box.ShowMessage(FakeAtlasUIComponents.FakeAtlasMessageBox.MessageType.InvalidPasswordOrLogin, CurrentLocalization);
             }
         }
     }

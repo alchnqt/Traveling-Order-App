@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FakeAtlas.Views"
-             xmlns:models="clr-namespace:FakeAtlas.Models.Entities"
              xmlns:viewmodels="clr-namespace:FakeAtlas.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:AdminViewModel}"
              mc:Ignorable="d" 

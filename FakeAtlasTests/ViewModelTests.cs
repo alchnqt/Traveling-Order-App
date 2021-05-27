@@ -48,7 +48,7 @@ namespace FakeAtlasTests
                             select user).Single();
                 string result1 =
                     Convert.ToBase64String(AtlasCrypto.
-                    GenerateSaltedHash(enc.GetBytes("123258789"), Convert.FromBase64String(salt.Salt)));
+                    GenerateSaltedHash(enc.GetBytes("125478963"), Convert.FromBase64String(salt.Salt)));
                 Assert.Equal(result1, salt.UserPassword);
             }
         }

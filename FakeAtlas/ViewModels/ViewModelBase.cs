@@ -19,8 +19,8 @@ namespace FakeAtlas.ViewModels
         /// <summary>
         /// Sign in/up and password changing validation
         /// </summary>
-        protected static Regex loginRegex = new(@"^.{5,20}$");
-        protected static Regex passwordRegex = new(@"^.{8,}$");
+        protected static Regex loginRegex = new(@"[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9]){5,20}$");
+        protected static Regex passwordRegex = new(@"(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}");
 
         /// <summary>
         /// Localization capture enum

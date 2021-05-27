@@ -26,14 +26,15 @@ namespace FakeAtlas.FakeAtlasUIComponents
         {
             EmptyAccountString = 0x000,
             EmptyPasskeyString = 0x002,
-            WrongPasswordOrLogin = 0x004,
+            InvalidPasswordOrLogin = 0x004,
             DeleteOrderError = 0x006,
             DeleteCompanyError = 0x008,
             EmptyStringError = 0x010,
             SuccessfulRegistration = 0x012,
             AlrdyExistingOrder = 0x014,
             FailPasswordRegex = 0x016,
-            FailLoginRegex = 0x018
+            FailLoginRegex = 0x018,
+            InvalidNumber = 0x020
         }
 
         public class Message
@@ -56,23 +57,25 @@ namespace FakeAtlas.FakeAtlasUIComponents
             new Message(MessageType.EmptyPasskeyString, ViewModelBase.Localization.en_GB, "Password field cannot be empty"),
             new Message(MessageType.EmptyStringError, ViewModelBase.Localization.en_GB,   "Data field cannot be empty"),
             new Message(MessageType.SuccessfulRegistration, ViewModelBase.Localization.en_GB, "Your account has been signed up!"),
-            new Message(MessageType.WrongPasswordOrLogin, ViewModelBase.Localization.en_GB, "Wrong login or password"),
+            new Message(MessageType.InvalidPasswordOrLogin, ViewModelBase.Localization.en_GB, "Wrong login or password"),
             new Message(MessageType.DeleteOrderError, ViewModelBase.Localization.en_GB, "Select order before deleting"),
             new Message(MessageType.DeleteCompanyError, ViewModelBase.Localization.en_GB, "Select company before deleting"),
             new Message(MessageType.AlrdyExistingOrder, ViewModelBase.Localization.en_GB, "You already have this order"),
             new Message(MessageType.FailLoginRegex, ViewModelBase.Localization.en_GB, "You cannot create a user using this login"),
             new Message(MessageType.FailPasswordRegex, ViewModelBase.Localization.en_GB, "You cannot create a user using this password"),
+            new Message(MessageType.InvalidNumber, ViewModelBase.Localization.en_GB, "Invalid number"),
 
             new Message(MessageType.EmptyAccountString, ViewModelBase.Localization.ru_RU, "Поле аккаунта не может быть пустым"),
             new Message(MessageType.EmptyPasskeyString, ViewModelBase.Localization.ru_RU, "Поле пароля не может быть пустым"),
             new Message(MessageType.EmptyStringError, ViewModelBase.Localization.ru_RU,   "Поле данных не может быть пустым"),
             new Message(MessageType.SuccessfulRegistration, ViewModelBase.Localization.ru_RU, "Ваш аккаунт был зарегистрирован!"),
-            new Message(MessageType.WrongPasswordOrLogin, ViewModelBase.Localization.ru_RU, "Неверный логин или пароль"),
+            new Message(MessageType.InvalidPasswordOrLogin, ViewModelBase.Localization.ru_RU, "Неверный логин или пароль"),
             new Message(MessageType.DeleteOrderError, ViewModelBase.Localization.ru_RU, "Выберите заказ перед удалением"),
             new Message(MessageType.DeleteCompanyError, ViewModelBase.Localization.ru_RU, "Выберите компанию перед удалением"),
             new Message(MessageType.AlrdyExistingOrder, ViewModelBase.Localization.ru_RU, "У вас уже есть этот заказ"),
             new Message(MessageType.FailLoginRegex, ViewModelBase.Localization.ru_RU, "Вы не можете создать пользователя с таким логином"),
-            new Message(MessageType.FailPasswordRegex, ViewModelBase.Localization.ru_RU, "Вы не можете создать пользователя с таким паролем")
+            new Message(MessageType.FailPasswordRegex, ViewModelBase.Localization.ru_RU, "Вы не можете создать пользователя с таким паролем"),
+            new Message(MessageType.InvalidNumber, ViewModelBase.Localization.ru_RU, "Введите другое число")
         };
         
 
