@@ -1,2 +1,2 @@
-# WPF PET PROJECT
+# WPF PROJECT
 MVVM + Entity Framework Core, unit-testing included 
